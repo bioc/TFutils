@@ -1,0 +1,275 @@
+\documentclass[9pt,a4paper,]{extarticle}
+
+\usepackage{f1000_styles}
+
+\usepackage[pdfborder={0 0 0}]{hyperref}
+
+\usepackage[numbers]{natbib}
+\bibliographystyle{unsrtnat}
+
+
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+
+% disable code chunks background
+%\renewenvironment{Shaded}{}{}
+
+% disable section numbers
+\setcounter{secnumdepth}{0}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+
+
+
+\begin{document}
+\pagestyle{front}
+
+\title{TFutils: Data Structures for Transcription Factor Bioinformatics}
+
+\author[1]{Shweta Gopaulakrishnan}
+\author[1]{Vincent Carey}
+\affil[1]{Channing Division of Network Medicine, Brigham and Women's Hospital, Harvard Medical School}
+
+\maketitle
+\thispagestyle{front}
+
+\begin{abstract}
+DNA transcription is intrinsically complex. Bioinformatic work with transcription factors (TFs) is complicated by a multiplicity of data resources and annotations. The Bioconductor package \emph{TFutils} includes data structures and content to enhance the precision and utility of integrative analyses that have components involving TFs.
+\end{abstract}
+
+\section*{Keywords}
+Bioinformatics, DNA transcription, Transcription factors
+
+
+\clearpage
+\pagestyle{main}
+
+\section{Introduction}\label{introduction}
+
+A central concern of genome biology is improving
+understanding of gene transcription. Transcription factors (TFs)
+are proteins that bind to DNA, typically near gene promoter
+regions. The role of TFs in gene expression variation
+is of great interest. Progress in deciphering
+genetic and epigenetic processes that affect TF abundance
+and function will be essential in clarifying and
+interpreting gene expression variation patterns
+and their effects on phenotype. Difficulties
+of identifying TFs, and opportunities for doing so in
+systems biology contexts, are reviewed in \citet{Weirauch2014}.
+
+This paper describes an R/Bioconductor package called
+TFutils, which assembles various resources intended
+to clarify and unify approaches to working with
+TF concepts in bioinformatic analysis. Computations
+described in this paper can be carried out with
+Bioconductor version 3.6. The package can be
+installed with
+
+\begin{verbatim}
+library(BiocInstaller) # use source("http://www.bioconductor.org/biocLite.R") if not available
+biocLite("TFutils")
+\end{verbatim}
+
+\subsection{Enumerating transcription factors}\label{enumerating-transcription-factors}
+
+Various sources of human tfs
+
+\begin{verbatim}
+## 'select()' returned 1:many mapping between keys and columns
+\end{verbatim}
+
+We have four basic enumerations of TFs with diverse forms of metadata.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{TFs_GO}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## TFutils TFCatalog instance GO.0003700 
+##  1068 native Ids, including
+## 165 ... 110354863 
+##  935 unique HGNC tags, including
+## AEBP1 AHR ... ZNF765-ZNF761 ZNF660-ZNF197
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{TFs_MSIG}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## TFutils TFCatalog instance MsigDb.TFT 
+##  615 native Ids, including
+## AAANWWTGC_UNKNOWN ... GCCATNTTG_YY1_Q6 
+##  196 unique HGNC tags, including
+## MYOD1 TCF3 ... USP7 YY1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{TFs_CISBP}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## TFutils TFCatalog instance CISBP.info 
+##  7592 native Ids, including
+## T004843_1.02 ... T153733_1.02 
+##  1551 unique HGNC tags, including
+## TFAP2B TFAP2B ... ZNF10 ZNF350
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{TFs_HOCO}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## TFutils TFCatalog instance hocomoco11 
+##  771 native Ids, including
+## AHR_HUMAN.H11MO.0.B ... ZSCA4_HUMAN.H11MO.0.D 
+##  680 unique HGNC tags, including
+## AHR AIRE ... ZSCAN31 ZSCAN4
+\end{verbatim}
+
+GO: 820
+HOCOMOCO: 680
+CIS-BP: 1734 (how many map to HGNC)?
+MSigDb
+TFclass
+
+A simple way of enumerating genes coding for TFs
+is to interrogate Gene Ontology Annotation. In Bioconductor 3.6,
+the annotations are derived from the November 2017
+\href{ftp://ftp.geneontology.org/pub/go/godatabase/archive/latest-lite/}{latest-lite} table. The number of distinct gene symbols annotated to
+the term \emph{DNA binding transcription factor activity} is found as
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+
+These annotations are accompanied by evidence codes.
+
+Another relevant resource is the HOCOMOCO project (\citet{Kulakovskiy2018}).
+In the conclusion of the 2018 \emph{Nucleic Acids Research} paper,
+these authors indicate that their database identifies 680
+human TFs.
+
+\subsection{Enumerating TF targets}\label{enumerating-tf-targets}
+
+The Broad Institute MSigDb (\citet{Subramanian15545}) includes
+a gene set collection devoted to cataloging TF targets.
+We have used Bioconductor's \emph{\href{http://bioconductor.org/packages/GSEABase}{GSEABase}} package
+to import and serialize the \texttt{gmt} representation of this
+collection.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{TFutils}\OperatorTok{::}\NormalTok{tftColl}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## GeneSetCollection
+##   names: AAANWWTGC_UNKNOWN, AAAYRNCTG_UNKNOWN, ..., GCCATNTTG_YY1_Q6 (615 total)
+##   unique identifiers: 4208, 481, ..., 56903 (12774 total)
+##   types in collection:
+##     geneIdType: EntrezIdentifier (1 total)
+##     collectionType: NullCollection (1 total)
+\end{verbatim}
+
+Names of TFs for which target sets are assembled are encoded
+in a somewhat systematic way. We attempt to decode with string operations:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tftn =}\StringTok{ }\KeywordTok{names}\NormalTok{(TFutils}\OperatorTok{::}\NormalTok{tftColl)}
+\NormalTok{stftn =}\StringTok{ }\KeywordTok{strsplit}\NormalTok{(tftn, }\StringTok{"_"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+So there are some exact matches between components of the MSigDb
+TF target collection names and the HOCOMOCO TF names. However,
+we observe some peculiarity in nomenclature in the MSigDb labels:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{grep}\NormalTok{(}\StringTok{"NFK"}\NormalTok{, }\KeywordTok{names}\NormalTok{(TFutils}\OperatorTok{::}\NormalTok{tftColl), }\DataTypeTok{value=}\OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "NFKAPPAB65_01"         "NFKAPPAB_01"           "NFKB_Q6"              
+## [4] "NFKB_C"                "NFKB_Q6_01"            "GGGNNTTTCC_NFKB_Q6_01"
+\end{verbatim}
+
+Some manual curation will be in order to improve the precision
+with which MSigDb TF target sets can used.
+
+\subsection{Quantitative data on TF binding sites}\label{quantitative-data-on-tf-binding-sites}
+
+{\small\bibliography{TFutils.bib}}
+
+\end{document}

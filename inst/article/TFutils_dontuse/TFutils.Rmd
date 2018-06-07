@@ -1,0 +1,136 @@
+---
+title: "TFutils: Data Structures for Transcription Factor Bioinformatics"
+author: 
+  - name: Shweta Gopaulakrishnan
+    affiliation: Channing Division of Network Medicine, Brigham and Women's Hospital, Harvard Medical School
+  - name: Vincent Carey
+    affiliation: Channing Division of Network Medicine, Brigham and Women's Hospital, Harvard Medical School
+abstract: DNA transcription is intrinsically complex.  Bioinformatic work with transcription factors (TFs) is complicated by a multiplicity of data resources and annotations.  The Bioconductor package _TFutils_ includes data structures and content to enhance the precision and utility of integrative analyses that have components involving TFs.
+keywords: Bioinformatics, DNA transcription, Transcription factors
+bibliography: TFutils.bib
+output: BiocWorkflowTools::f1000_article
+---
+
+# Introduction
+
+```{r setup,echo=FALSE}
+suppressPackageStartupMessages({
+library(BiocStyle)
+library(TFutils)
+library(org.Hs.eg.db)
+library(GO.db)
+library(data.table)
+})
+```
+
+A central concern of genome biology is improving
+understanding of gene transcription.  Transcription factors (TFs)
+are proteins that bind to DNA, typically near gene promoter
+regions.  The role of TFs in gene expression variation
+is of great interest.  Progress in deciphering
+genetic and epigenetic processes that affect TF abundance
+and function will be essential in clarifying and
+interpreting gene expression variation patterns
+and their effects on phenotype.  Difficulties
+of identifying TFs, and opportunities for doing so in
+systems biology contexts, are reviewed in @Weirauch2014.
+
+This paper describes an R/Bioconductor package called
+TFutils, which assembles various resources intended
+to clarify and unify approaches to working with
+TF concepts in bioinformatic analysis.  Computations
+described in this paper can be carried out with
+Bioconductor version 3.6.  The package can be 
+installed with
+```
+library(BiocInstaller) # use source("http://www.bioconductor.org/biocLite.R") if not available
+biocLite("TFutils")
+```
+
+## Enumerating transcription factors
+
+Various sources of human tfs
+
+
+```{r setup2, echo=FALSE}
+library(TFutils)
+library(AnnotationDbi)
+tfdf = select(org.Hs.eg.db::org.Hs.eg.db, 
+    keys="GO:0003700", keytype="GO", 
+    columns=c("ENTREZID", "SYMBOL"))
+tfdf = tfdf[, c("ENTREZID", "SYMBOL")]
+TFs_GO = TFCatalog(name="GO.0003700", nativeIds=tfdf$ENTREZID,
+ HGNCmap=tfdf)
+
+data(tftColl)
+data(tftCollMap)
+TFs_MSIG = TFCatalog(name="MsigDb.TFT", nativeIds=names(tftColl),
+ HGNCmap=data.frame(tftCollMap,stringsAsFactors=FALSE))
+
+data(cisbpTFcat)
+TFs_CISBP = TFCatalog(name="CISBP.info", nativeIds=cisbpTFcat[,1],
+ HGNCmap = cisbpTFcat)
+
+data(hocomoco.mono)
+TFs_HOCO = TFCatalog(name="hocomoco11", nativeIds=hocomoco.mono[,1],
+ HGNCmap=hocomoco.mono)
+```
+
+We have four basic enumerations of TFs with diverse forms of metadata.
+```{r lk4}
+TFs_GO
+TFs_MSIG
+TFs_CISBP
+TFs_HOCO
+```
+
+GO: 820
+HOCOMOCO: 680
+CIS-BP: 1734 (how many map to HGNC)?
+MSigDb
+TFclass
+
+A simple way of enumerating genes coding for TFs
+is to interrogate Gene Ontology Annotation.  In Bioconductor 3.6,
+the annotations are derived from the November 2017
+[latest-lite](ftp://ftp.geneontology.org/pub/go/godatabase/archive/latest-lite/) table.  The number of distinct gene symbols annotated to
+the term _DNA binding transcription factor activity_ is found as
+```{r dotfa}
+1
+```
+These annotations are accompanied by evidence codes.
+
+Another relevant resource is the HOCOMOCO project (@Kulakovskiy2018).
+In the conclusion of the 2018 _Nucleic Acids Research_ paper,
+these authors indicate that their database identifies 680
+human TFs.
+
+## Enumerating TF targets 
+
+The Broad Institute MSigDb (@Subramanian15545) includes
+a gene set collection devoted to cataloging TF targets.
+We have used Bioconductor's `r Biocpkg("GSEABase")` package
+to import and serialize the `gmt` representation of this
+collection.
+
+```{r lkbro}
+TFutils::tftColl
+```
+
+Names of TFs for which target sets are assembled are encoded 
+in a somewhat systematic way.  We attempt to decode with string operations:
+```{r lktft1}
+tftn = names(TFutils::tftColl)
+stftn = strsplit(tftn, "_")
+```
+So there are some exact matches between components of the MSigDb
+TF target collection names and the HOCOMOCO TF names.  However,
+we observe some peculiarity in nomenclature in the MSigDb labels:
+```{r lktft2}
+grep("NFK", names(TFutils::tftColl), value=TRUE)
+```
+Some manual curation will be in order to improve the precision
+with which MSigDb TF target sets can used.
+
+## Quantitative data on TF binding sites
+
