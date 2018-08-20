@@ -88,3 +88,11 @@
 #' tfhash[1:3,]
 "tfhash"
 
+#' encode690: DataFrame extending AnnotationHub metadata about ENCODE cell line x TF ranges
+#' @docType data
+#' @format DataFrame
+#' @source see metadata(encode690)
+#' @examples
+#' names(TFutils::encode690)
+#' TFutils::encode690[,1:5]
+"encode690"

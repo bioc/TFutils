@@ -2,7 +2,6 @@
 #' utility to read FIMO outputs from local resource(cluster), assuming bed text split by chromosome
 #' @importFrom IRanges IRanges
 #' @importFrom GenomicRanges GRanges
-#' @importFrom data.table fread
 #' @param tf character(1) file id
 #' @param chr character(1) chromosome name
 #' @return data.table instance
@@ -14,6 +13,7 @@
 #' dim(importFIMO_local_split("M5946_1", "chr17"))
 #' @export
 importFIMO_local_split = function( tf, chr ) {
+  if (!requireNamespace("data.table")) stop("install data.table to use this function")
   stopifnot(length(tf)==1, is(tf, "character"))
   chromosome = chr
   myfile = system.file(paste0(tf,"/",chromosome,".bed"), package="TFutils")

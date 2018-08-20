@@ -5,7 +5,8 @@
 \title{create table of TF targets and related metadata}
 \usage{
 grabTab(tfstub = "STAT1", gscoll = TFutils::tftColl,
-  orgdb = org.Hs.eg.db::org.Hs.eg.db, gwrngs = TFutils::gwascat_hg19_chr17)
+  orgdb = org.Hs.eg.db::org.Hs.eg.db,
+  gwrngs = TFutils::gwascat_hg19_chr17)
 }
 \arguments{
 \item{tfstub}{character(1) gene-like symbol for TF; will be grepped in names(gscoll)}

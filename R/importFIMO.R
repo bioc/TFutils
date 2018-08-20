@@ -31,8 +31,9 @@ setMethod("importFIMO", c("TabixFile", "GRanges"), function(src, parms, ...) {
 #' @aliases importFIMO,character,missing-method
 #' @export
 setMethod("importFIMO", c("character", "missing"), function(src, parms, ...) {
+  if (!requireNamespace("data.table")) stop("install data.table to use this function")
   stopifnot(file.exists(src)) # assume textual bed-like file
-  tmp = fread(src)
+  tmp = data.table::fread(src)
   GenomicRanges::GRanges(tmp$V1, IRanges::IRanges(
       start=tmp$V2, end=tmp$V3), score=tmp$V5, pvalue=tmp$V7, strand=tmp$V6, 
       ...)
