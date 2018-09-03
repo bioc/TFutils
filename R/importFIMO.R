@@ -1,11 +1,7 @@
 setGeneric("importFIMO", function(src, parms, ...) standardGeneric("importFIMO"))
 
 #' import a FIMO bed-like file
-#' @importFrom Rsamtools TabixFile scanTabix
-#' @importFrom GenomicRanges GRanges
-#' @importFrom IRanges IRanges
-#' @importFrom GenomeInfoDb seqinfo
-#' @importFrom utils read.delim
+#' # @importFrom utils read.delim
 #' @rdname importFIMO
 #' @aliases importFIMO,TabixFile,GRanges-method importFIMO
 #' @param src TabixFile instance
@@ -19,12 +15,14 @@ setGeneric("importFIMO", function(src, parms, ...) standardGeneric("importFIMO")
 #'  }
 #' @export
 setMethod("importFIMO", c("TabixFile", "GRanges"), function(src, parms, ...) {
+  jnk = lapply(c("GenomeInfoDb", "Rsamtools", "GenomicRanges", "IRanges",
+    "GenomeInfoDb"), reqNS)
   tmp = Rsamtools::scanTabix(src, param=parms) # list with one element per range in parms
-  dfs = lapply(tmp, function(x) read.delim(textConnection(x), header=FALSE))
+  dfs = lapply(tmp, function(x) utils::read.delim(textConnection(x), header=FALSE))
   alldf = do.call(rbind, dfs)
-  GRanges(alldf$V1, IRanges(
+  GenomicRanges::GRanges(alldf$V1, IRanges::IRanges(
       start=alldf$V2, end=alldf$V3), score=alldf$V5, pvalue=alldf$V7, strand=alldf$V6, 
-      seqinfo=seqinfo(parms), ...)
+      seqinfo=GenomeInfoDb::seqinfo(parms), ...)
 })
 
 #' @rdname importFIMO

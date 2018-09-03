@@ -5,7 +5,7 @@
 \alias{importFIMO,TabixFile,GRanges-method}
 \alias{importFIMO}
 \alias{importFIMO,character,missing-method}
-\title{import a FIMO bed-like file}
+\title{import a FIMO bed-like file@importFrom utils read.delim}
 \usage{
 \S4method{importFIMO}{TabixFile,GRanges}(src, parms, ...)
 
@@ -22,7 +22,7 @@
 instance of GRanges
 }
 \description{
-import a FIMO bed-like file
+import a FIMO bed-like file@importFrom utils read.delim
 }
 \examples{
 if (requireNamespace("Rsamtools")) {

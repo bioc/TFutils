@@ -23,7 +23,9 @@ instance of TFCatalog
 Constructor for TFCatalog
 }
 \examples{
-TFs_MSIG = TFCatalog(name="MsigDb.TFT",nativeIds=names(tftColl),
-HGNCmap=data.frame(tftCollMap,stringAsFactors=FALSE))
-TFs_MSIG
+if (require("GSEABase")) {
+ TFs_MSIG = TFCatalog(name="MsigDb.TFT",nativeIds=names(TFutils::tftColl),
+ HGNCmap=data.frame(TFutils::tftCollMap,stringAsFactors=FALSE))
+ TFs_MSIG
+}
 }

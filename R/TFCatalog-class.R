@@ -1,7 +1,6 @@
 #' define a structure to hold information about TFs from diverse reference sources
 #' @importFrom methods new show
 #' @importFrom stats na.omit
-#' @importFrom Biobase selectSome
 #' @slot name character 
 #' @slot nativeIds character tokens used by the provider to enumerate transcription factors
 #' @slot HGNCmap data.frame with atleast two columns,
@@ -26,9 +25,11 @@ setClass("TFCatalog", representation(name="character",
 #' @param metadata a list of metadata elements
 #' @return instance of TFCatalog
 #' @examples
-#' TFs_MSIG = TFCatalog(name="MsigDb.TFT",nativeIds=names(tftColl),
-#' HGNCmap=data.frame(tftCollMap,stringAsFactors=FALSE))
-#' TFs_MSIG
+#' if (require("GSEABase")) {
+#'  TFs_MSIG = TFCatalog(name="MsigDb.TFT",nativeIds=names(TFutils::tftColl),
+#'  HGNCmap=data.frame(TFutils::tftCollMap,stringAsFactors=FALSE))
+#'  TFs_MSIG
+#' }
 #' @export
 TFCatalog = function(name, nativeIds, HGNCmap, metadata) {
   if (missing(metadata)) metadata=list()
@@ -49,6 +50,7 @@ HGNCmap = function(x) slot(x, "HGNCmap")
 #' @param object instance of TFCatalog
 #' @export
 setMethod("show", "TFCatalog", function(object) {
+  reqNS("Biobase")
   cat("TFutils TFCatalog instance", object@name, "\n")
   cat(sprintf(" %d native Ids, including\n", length(object@nativeIds)))
   cat(Biobase::selectSome(object@nativeIds, max=2), "\n")

@@ -3,11 +3,9 @@
 #' @importFrom shiny selectInput dataTableOutput reactive renderDataTable observeEvent
 #' @importFrom shiny runGadget stopApp
 #' @import miniUI
-#' @importFrom GSEABase geneIdType SymbolIdentifier "geneIdType<-" setName geneIds
 #' @param gscoll a GSEABase GeneSetCollection
 #' @param initTF character(1) initial TF string for app
 #' @param gadtitle character(1) a title for the gadget panel
-#' @rawNamespace importClassesFrom(GenomicRanges, GRanges)
 #' @note Will use TFutils::gwascat_hg19_chr17 to look for 'MAPPED_GENE' field entries matching targets, also hardcoded to use org.Hs.eg.db to map symbols
 #' @return on app conclusion a data.frame is returned
 #' @examples

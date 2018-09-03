@@ -25,10 +25,9 @@
 "tftColl"
 
 #' fimo16: GenomicFiles instance to AWS S3-resident FIMO bed for 16 TFs
-#' @importClassesFrom GenomicFiles GenomicFiles
 #' @docType data
 #' @format GenomicFiles for a TabixFileList
-#' @source K. Glass ran FIMO
+#' @source K. Glass FIMO runs, see \url{https://doi.org/10.1016/j.celrep.2017.10.001}
 #' @examples
 #' TFutils::fimo16
 "fimo16"

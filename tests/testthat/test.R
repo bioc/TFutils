@@ -1,4 +1,6 @@
 library(TFutils)
+library(GSEABase)
+library(GenomicRanges)
 
 context("table/range generation")
 
