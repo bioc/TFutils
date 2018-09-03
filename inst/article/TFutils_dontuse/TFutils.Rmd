@@ -44,7 +44,7 @@ Bioconductor version 3.6.  The package can be
 installed with
 ```
 library(BiocInstaller) # use source("http://www.bioconductor.org/biocLite.R") if not available
-biocLite("TFutils")
+BiocManager::install("TFutils")
 ```
 
 ## Enumerating transcription factors
