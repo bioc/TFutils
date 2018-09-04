@@ -1,7 +1,7 @@
 Package: TFutils
 Title: TFutils
 Description: Package to work with TF data.
-Version: 1.1.4
+Version: 1.1.5
 Authors@R: c(
  person("Vincent", "Carey", role = c("aut"), email = "stvjc@channing.harvard.edu"),
  person("Shweta", "Gopaulakrishnan", role = c("cre","aut"), email = "reshg@channing.harvard.edu"))
