@@ -20,7 +20,8 @@ grabTab = function(tfstub="STAT1", gscoll=TFutils::tftColl,
 reqNS("S4Vectors")
 MAPPED_GENE <- CHR_ID <- `DISEASE/TRAIT` <- NULL
 CHR_POS <- REGION <- NULL
-allst1 = unlist(lapply(gscoll[ grep(tfstub, names(gscoll)) ], GSEABase::geneIds))
+ngs = sapply(gscoll, GSEABase::setName)
+allst1 = unlist(lapply(gscoll[ grep(tfstub, ngs) ], GSEABase::geneIds))
 st1syms = AnnotationDbi::mapIds(orgdb, keys=allst1, keytype="ENTREZID", column="SYMBOL")
 chk = as(S4Vectors::mcols(gwrngs), "data.frame") %>% 
      filter(MAPPED_GENE %in% st1syms) %>% select(`DISEASE/TRAIT`, MAPPED_GENE, CHR_ID, CHR_POS, REGION)

@@ -36,7 +36,12 @@
 #' @docType data
 #' @format data.frame
 #' @source \url{http://cisbp.ccbr.utoronto.ca/bulk.php} select Homo_sapiens
-#' @note Extracted March 2018
+#' @note Extracted March 2018, checked August 2018.  The only changes
+#' observed are that genes ZUFSP and T are used has HGNC values
+#' in the March catalog; these symbols seem to be absent from the 
+#' org.Hs.eg.db of August 2018.  The records involved are 
+#' 1356, 7412 and 7413.  These symbols were left in the package image
+#' of CISBP in August 2018.
 #' @examples
 #' head(TFutils::cisbpTFcat)
 "cisbpTFcat"
@@ -95,3 +100,12 @@
 #' names(TFutils::encode690)
 #' TFutils::encode690[,1:5]
 "encode690"
+
+#' hocomoco.mono.sep2018: data.frame with information on HOCOMOCO TFs for human, Sept 2018 download
+#' @docType data
+#' @format data.frame
+#' @source \url{http://hocomoco11.autosome.ru/human/mono?full=true} 
+#' @note Extracted September 2018
+#' @examples
+#' head(TFutils::hocomoco.mono.sep2018)
+"hocomoco.mono.sep2018"

@@ -5,6 +5,7 @@
 #' @import miniUI
 #' @param gscoll a GSEABase GeneSetCollection
 #' @param initTF character(1) initial TF string for app
+#' @param gwcat GRanges-like structure with GWAS catalog information
 #' @param gadtitle character(1) a title for the gadget panel
 #' @note Will use TFutils::gwascat_hg19_chr17 to look for 'MAPPED_GENE' field entries matching targets, also hardcoded to use org.Hs.eg.db to map symbols
 #' @return on app conclusion a data.frame is returned
@@ -12,16 +13,17 @@
 #' if (interactive()) TFtargs()
 #' @export
 TFtargs = function(gscoll=TFutils::tftColl, initTF="VDR_Q3",
+   gwcat = TFutils::gwascat_hg19_chr17,
    gadtitle="Search for a TF; its targets will be checked for mapped status in GWAS catalog") {
   ui <- miniPage(gadgetTitleBar(gadtitle), 
                  miniContentPanel(
-                    selectInput("tfsel", "TF:", names(gscoll),
+                    selectInput("tfsel", "TF:", sapply(gscoll, GSEABase::setName),
                          selected = initTF),
                     dataTableOutput("tab"))
                 ) # end page
   server <- function(input, output, session) {
     getTab = reactive({
-      grabTab(input$tfsel, TFutils::tftColl, org.Hs.eg.db::org.Hs.eg.db, TFutils::gwascat_hg19_chr17)
+      grabTab(input$tfsel, TFutils::tftColl, org.Hs.eg.db::org.Hs.eg.db, gwcat)
       })
     output$tab <- renderDataTable({
       getTab()

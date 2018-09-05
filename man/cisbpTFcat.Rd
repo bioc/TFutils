@@ -15,7 +15,12 @@ cisbpTFcat
 cisbpTFcat: data.frame with information on CISBP TFs for human
 }
 \note{
-Extracted March 2018
+Extracted March 2018, checked August 2018.  The only changes
+observed are that genes ZUFSP and T are used has HGNC values
+in the March catalog; these symbols seem to be absent from the
+org.Hs.eg.db of August 2018.  The records involved are
+1356, 7412 and 7413.  These symbols were left in the package image
+of CISBP in August 2018.
 }
 \examples{
 head(TFutils::cisbpTFcat)

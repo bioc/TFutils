@@ -40,7 +40,11 @@ library(BiocParallel)
 library(png)
 library(grid)
 library(GSEABase) # for tftColl
+library(gwascat)
 data(fimoMap)
+data(ebicat37)
+library(dplyr)
+library(magrittr)
 })
 ```
 
@@ -117,7 +121,7 @@ servers provide easily parsed tabular catalogs.
 library(TFutils)
 library(AnnotationDbi)
 suppressMessages({
-tfdf = select(org.Hs.eg.db::org.Hs.eg.db, 
+tfdf = AnnotationDbi::select(org.Hs.eg.db::org.Hs.eg.db, 
     keys="GO:0003700", keytype="GO", 
     columns=c("ENTREZID", "SYMBOL"))
 })
@@ -134,9 +138,9 @@ data(cisbpTFcat)
 TFs_CISBP = TFCatalog(name="CISBP.info", nativeIds=cisbpTFcat[,1],
  HGNCmap = cisbpTFcat)
 
-data(hocomoco.mono)
-TFs_HOCO = TFCatalog(name="hocomoco11", nativeIds=hocomoco.mono[,1],
- HGNCmap=hocomoco.mono)
+data(hocomoco.mono.sep2018)
+TFs_HOCO = TFCatalog(name="hocomoco11", nativeIds=hocomoco.mono.sep2018[,1],
+ HGNCmap=hocomoco.mono.sep2018)
 ```
 
 ```{r lkupset,echo=FALSE,out.width='60%', fig.cap='Sizes of TF catalogs and of intersections based on HGNC symbols for TFs.', fig.pos='h'}
@@ -297,11 +301,13 @@ is provided in Figure \@ref(fig:finish).
 ```{r finish, fig.height=3.5,echo=FALSE,fig.cap='TF binding in the vicinity of gene ORMDL3.  Points are -log10-transformed FIMO-based p-values colored according to TF class as annotated in CISBP.  Segments at bottom of plot are transcribed regions of ORMDL3 according to UCSC gene models in build hg19.'}
 library(ggplot2)
 myf = function(a=38077296, b=38078938) 
-  geom_segment(aes(x=a, xend=b, y=2.85, yend=2.85, colour="[ORMDL3]"))
-ggplot(nn, aes(x=loc,y=score,group=tffam, colour=tffam)) + geom_point() + myf() +
- myf(38079365, 38079516) + myf(38080283, 38080478) + 
- myf(38081008, 38081058) + myf(38081422, 38081624) + 
- myf(38081876, 38083094) + myf(38083737, 38083884) + ylab("-log10 FIMO p-value") + 
+  geom_segment(aes(x=a, xend=b, y=2.85, yend=2.85, 
+  colour="[ORMDL3]"))
+ggplot(nn, aes(x=loc,y=score,group=tffam, colour=tffam)) + 
+  geom_point() + myf() + myf(38079365, 38079516) + 
+    myf(38080283, 38080478) + myf(38081008, 38081058) + 
+    myf(38081422, 38081624) + myf(38081876, 38083094) + 
+    myf(38083737, 38083884) + ylab("-log10 FIMO p-value") + 
  xlab("position on chr17, hg19")
 ```
 
@@ -324,7 +330,7 @@ illustration is given in Figure \@ref(fig:lkbi), in which
 is it suggested that in HepG2 cells, CEBPB exhibits a distinctive
 pattern of binding in the vicinity of ORMDL3.  
 
-```{r lkbi, fig.cap='Binding of CEBPB in the vicinity of ORMDL3 derived from ChIP-seq experiments in four cell lines reported by ENCODE.  Colored rectangles at top are regions identified as narrow binding peaks, arrows in bottom half are exons in ORMDL3.  Arrows sharing a common vertical position are members of the same transcript as cataloged in Ensembl version 79.', echo=FALSE}
+```{r lkbi, fig.cap='Binding of CEBPB in the vicinity of ORMDL3 derived from ChIP-seq experiments in four cell lines reported by ENCODE.  Colored rectangles at top are regions identified as narrow binding peaks, arrows in bottom half are exons in ORMDL3.  Arrows sharing a common vertical position are members of the same transcript as cataloged in Ensembl version 75.', echo=FALSE}
 pp = readPNG("ormdl3CEBPB.png")
 grid.raster(pp)
 ```
@@ -343,24 +349,107 @@ and methods of the `r Biocpkg("TFutils")` package.
 
 ## Implementation
 
-### The `TFCatalog` class
+The TFutils package is designed to lower barriers to
+usage of key findings of TF biology in human genome
+research.  TFutils is supplied as a conventional R package
+distributed with, and making use of, the Bioconductor
+software ecosystem.  TFutils includes ready-to-use
+reference data, tools for visualizing
 
-A number of relatively small reference
+### Data resources
+
+**Catalogs.** Two reference resources have been collected into
+the TFutils package as data.frame instances.  These
+are `cisbpTFcat` (CISBP: `r nrow(cisbpTFcat)` x `r ncol(cisbpTFcat)`),
+and
+`hocomoco.mono.sep2018` (mononucleotide models, full catalog,
+`r nrow(hocomoco.mono.sep2018)` x `r ncol(hocomoco.mono.sep2018)`).  These
+data.frames are snapshots of the CISBP and HOCOMOCO catalogs
+
+**Indexed BED in AWS S3.**  As described above `fimo16`
+provides programmatic access to FIMO scores for 16 TFs, using
+the `r Biocpkg("GenomicFiles")` protocol.
+
+**Annotated reference to ENCODE ChIP-seq results.**
+`encode690` simplifies programmatic access to TF:cell-line
+combinations available in Bioconductor `r Biocpkg("AnnotationHub")`.
+
+**TF targets enumerated in MsigDb.**  The c3-TFT (TF targets) subset
+from MSigDb is provided as a GeneSetCollection instance as
+defined in `r Biocpkg("GSEABase")`.
+
+**Illustrative GWAS records.** The full EBI/EMBL GWAS catalog
+is available in the `r Biocpkg("gwascat")` package; for convenience,
+an excerpt focusing on chromosome 17 is supplied with TFutils
+as `gwascat_hg19_chr17`.
+
+### Infrastructure for interacting with components of TFutils
+
+**Interactive enumeration of TF targets implicated in GWAS.**
+The `TFtargs` function runs a shiny app that permits
+selection of a TF in the nomenclature of the MSigDb
+c3/TFT gene set collection.
+The app will search an object
+provided by the `r Biocpkg("gwascat")` package for
+references in the `MAPPED_GENE` field that match
+the targets of the selected TF.
+Figure \@ref{fig:lktarapp}
+gives an illustration.  
+
+```{r lktarapp, fig.cap='TFtargs() screenshot.',echo=FALSE}
+pp = readPNG("tfTargsApp.png")
+grid.raster(pp)
 ```
-data(tftColl)
-data(tftCollMap)
+
+**The TFCatalog S4 class**.  Reference catalogs for TF biology are structured with the
+`TFCatalog` S4 class.  Two essential components for
+managing a catalog are the native TF identifier
+for the catalog and the HGNC gene symbol typically
+used to name the TF.  The `TFCatalog` class includes
+a name field to name the catalog, and
+a character vector with elements comprised of the
+native identifiers for catalogued TFs.  
+For example, CISBP uses `T004843_1.02` to refer
+to motifs associated with gene TFAP2B.  There
+are five such motifs, three derived from SELEX,
+one from Transfac, and one from Hocomoco.
+
+A `data.frame` instance that has an
+obligatory column named 'HGNC' can include any collection
+of fields that offer metadata about the TF in the specified
+catalog.  Here is how we construct and view a TFCatalog object
+using the CISBP reference data.
+```{r ljlj}
 data(cisbpTFcat)
-
-TFs_MSIG = TFCatalog(name="MsigDb.TFT", nativeIds=names(tftColl),
- HGNCmap=data.frame(tftCollMap,stringsAsFactors=FALSE))
-
-TFs_CISBP = TFCatalog(name="CISBP.info", nativeIds=cisbpTFcat[,1],
- HGNCmap = cisbpTFcat)
-
-TFs_MSIG
-
+TFs_CISBP = TFCatalog(name="CISBP.info", 
+   nativeIds=cisbpTFcat[,1],
+   HGNCmap = cisbpTFcat)
 TFs_CISBP
 ```
 
-## Operation
+## Operation: Use cases
+
+**TFs that are direct GWAS hits.** The following function accepts
+a string naming a trait , and returns a data.frame
+of TFs identified as "mapped genes" for the trait,
+with their TF "family name".
+
+```{r defdir}
+library(dplyr)
+library(magrittr)
+library(gwascat)
+data(ebicat37)
+directHitsInCISBP = function(traitTag, gwascat) {
+   stopifnot(traitTag %in% gwascat$`DISEASE/TRAIT`)
+   as.data.frame(mcols(gwascat)) %>%  # names are normalized
+     dplyr::select(DISEASE.TRAIT, MAPPED_GENE) %>% 
+     dplyr::filter(DISEASE.TRAIT==traitTag) %>% 
+     mutate(HGNC=MAPPED_GENE) %>% 
+     inner_join(cisbpTFcat) %>% 
+     dplyr::select(HGNC, Family_Name) %>% unique()
+   }
+directHitsInCISBP("Rheumatoid arthritis", ebicat37)
+```
+
+
 
