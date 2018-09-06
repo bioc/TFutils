@@ -43,7 +43,8 @@ described in this paper can be carried out with
 Bioconductor version 3.6.  The package can be 
 installed with
 ```
-library(BiocInstaller) # use source("http://www.bioconductor.org/biocLite.R") if not available
+library(BiocManager) # use if (!requireNamespace("BiocManager", quietly=TRUE)) if not available
+     install.packages("BiocManager") if not available
 BiocManager::install("TFutils")
 ```
 
