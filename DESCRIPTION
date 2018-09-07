@@ -12,7 +12,7 @@ Suggests: knitr, data.table, GSEABase, testthat,
 	GenomicRanges, Gviz, IRanges, Rsamtools, S4Vectors, 
 	org.Hs.eg.db, EnsDb.Hsapiens.v75, BiocParallel,
 	BiocStyle, GO.db, GenomicFiles, GenomeInfoDb,
-	SummarizedExperiment, UpSetR, ggplot2, png
+	SummarizedExperiment, UpSetR, ggplot2, png, gwascat
 License: Artistic-2.0
 LazyLoad: true
 ByteCompile: true

@@ -439,15 +439,6 @@ library(dplyr)
 library(magrittr)
 library(gwascat)
 data(ebicat37)
-directHitsInCISBP = function(traitTag, gwascat) {
-   stopifnot(traitTag %in% gwascat$`DISEASE/TRAIT`)
-   as.data.frame(mcols(gwascat)) %>%  # names are normalized
-     dplyr::select(DISEASE.TRAIT, MAPPED_GENE) %>% 
-     dplyr::filter(DISEASE.TRAIT==traitTag) %>% 
-     mutate(HGNC=MAPPED_GENE) %>% 
-     inner_join(cisbpTFcat) %>% 
-     dplyr::select(HGNC, Family_Name) %>% unique()
-   }
 directHitsInCISBP("Rheumatoid arthritis", ebicat37)
 ```
 
