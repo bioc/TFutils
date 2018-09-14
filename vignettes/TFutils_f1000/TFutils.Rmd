@@ -11,7 +11,17 @@ author:
     affiliation: Channing Division of Network Medicine, Brigham and Women's Hospital, Harvard Medical School
   - name: Vincent Carey
     affiliation: Channing Division of Network Medicine, Brigham and Women's Hospital, Harvard Medical School
-abstract: DNA transcription is intrinsically complex.  Bioinformatic work with transcription factors (TFs) is complicated by a multiplicity of data resources and annotations.  The Bioconductor package _TFutils_ includes data structures and content to enhance the precision and utility of integrative analyses that have components involving TFs.
+abstract: >
+  DNA transcription is intrinsically complex.  Bioinformatic work 
+  with transcription factors (TFs) is complicated by a multiplicity of data resources 
+  and annotations.  The Bioconductor package _TFutils_ includes data structures 
+  and functions to enhance the precision and utility of integrative analyses 
+  that have components involving TFs.  _TFutils_ provides catalogs of human TFs
+  from three reference sources (CISBP, HOCOMOCO, and GO), a catalog of
+  TF targets derived from MSigDb, and multiple approaches to enumerating
+  TF binding sites.  Aspects of integration of TF binding
+  patterns and genome-wide association study results are explored in
+  examples.
 keywords: Bioinformatics, DNA transcription, Transcription factors
 bibliography: tfsrcs.bib
 includes:  
@@ -77,7 +87,7 @@ install("TFutils")
 ```
 
 In the next section we describe the basic concepts of enumerating and
-classifying TFs, enumerating their targets, and representing
+classifying TFs, enumerating TF targets, and representing
 genome-wide quantification of TF binding affinity.
 This is followed by a review of the key data
 structures and functions provided in the package, and an
@@ -185,7 +195,7 @@ encountered TF classifications in the CISBP and HOCOMOCO
 catalogs.  The numerical components of the HOCOMOCO
 classes correspond to TFClass subfamilies (@Wingender2018).
 
-Table: (\#tab:classtab) Most frequently represented TF classes in CISBP and HOCOMOCO. Entries in columns Nc (Nh) are numbers of distinct TFs annotated to classes in columns CISBP (HOCOMOCO) respectively.  Entries are ordered top to bottom by frequency of occurrence.  There is no substantive correspondence between entries on a given row.  Harmonization of class terminology could begin by creating such a correspondence, but that is beyond the scope of this paper.
+Table: (\#tab:classtab) Most frequently represented TF classes in CISBP and HOCOMOCO. Entries in columns Nc (Nh) are numbers of distinct TFs annotated to classes in columns CISBP (HOCOMOCO) respectively.  Entries are ordered top to bottom by frequency of occurrence.  There is no substantive correspondence between entries on a given row.  Harmonization of class terminology is beyond the scope of this paper.
 
 ```{r dodo,echo=FALSE}
 library(knitr)
@@ -223,9 +233,16 @@ grep("NFK", names(TFutils::tftColl), value=TRUE)
 ```
 
 Manual curation will be needed to improve the precision
-with which MSigDb TF target sets can used.
+with which MSigDb TF target sets can be associated with
+specific TFs or motifs.
 
 ## Quantitative predictions of TF binding affinities
+
+In this subsection we address representation of putative
+binding sites.  First we illustrate how to represent sequence-based
+affinity measures and the binding site locations implied by
+these.  We then discuss use of results of ChIP-seq experiments
+for cell-type-specific binding site enumeration.
 
 ### Affinity scores based on reference sequence
 
@@ -270,7 +287,7 @@ gg = lapply(rr, function(x) {
 for (i in 1:length(gg))  gg[[i]]$tf = colData(fimo16)[i,2]
 ```
 It turns out there are too many distinct TFs
-to display individually, so we label the
+to display names individually, so we label the
 scores with the names of the
 associated TF families as defined in CISBP.
 ```{r domat}
@@ -354,7 +371,9 @@ usage of key findings of TF biology in human genome
 research.  TFutils is supplied as a conventional R package
 distributed with, and making use of, the Bioconductor
 software ecosystem.  TFutils includes ready-to-use
-reference data, tools for visualizing
+reference data, tools for visualizing binding sites,
+and tools that simplify integrative use of TF binding
+information with GWAS findings.
 
 ### Data resources
 
@@ -393,7 +412,7 @@ The app will search an object
 provided by the `r Biocpkg("gwascat")` package for
 references in the `MAPPED_GENE` field that match
 the targets of the selected TF.
-Figure \@ref{fig:lktarapp}
+Figure \@ref(fig:lktarapp)
 gives an illustration.  
 
 ```{r lktarapp, fig.cap='TFtargs() screenshot.',echo=FALSE}
@@ -429,7 +448,13 @@ TFs_CISBP
 
 ## Operation: Use cases
 
-**TFs that are direct GWAS hits.** The following function accepts
+In this section we consider applications of the tools
+in genetic epidemiology.  First we look for TFs that
+may harbor variants associated with traits in the EBI
+GWAS catalog.  Then we show how to enumerate traits
+associated with targets of a selected TF.
+
+**TFs that are direct GWAS hits for a given trait.** `directHitsInCISBP` accepts
 a string naming a trait , and returns a data.frame
 of TFs identified as "mapped genes" for the trait,
 with their TF "family name".
@@ -442,5 +467,18 @@ data(ebicat37)
 directHitsInCISBP("Rheumatoid arthritis", ebicat37)
 ```
 
+**Traits mapped to genes that are targets of a given TF**
 
+`topTraitsOfTargets` will acquire the targets of a selected
+TF, check for hits in these genes in a given GWAS catalog instance, and
+tabulate the most commonly reported traits.
 
+```{r lktr}
+tt = topTraitsOfTargets("MTF1", TFutils::tftColl, ebicat37)
+head(tt)
+table(tt[,1])
+```
+
+# Discussion
+
+[TBD]
