@@ -7,6 +7,10 @@ author:
     affiliation: Channing Division of Network Medicine, Brigham and Women's Hospital, Harvard Medical School
   - name: Kimberly Glass
     affiliation: Channing Division of Network Medicine, Brigham and Women's Hospital, Harvard Medical School
+  - name: Nathalie Pochet
+    affiliation: Department of Neurology, Brigham and Women's Hospital, Harvard Medical School; Broad Institute
+  - name: Rileen Sinha
+    affiliation: Department of Neurology, Brigham and Women's Hospital, Harvard Medical School; Broad Institute
   - name: Benjamin Raby
     affiliation: Channing Division of Network Medicine, Brigham and Women's Hospital, Harvard Medical School
   - name: Vincent Carey
@@ -35,6 +39,8 @@ vignette: >
 # Introduction
 
 ```{r setup,echo=FALSE}
+suppressWarnings({
+suppressMessages({
 suppressPackageStartupMessages({
 library(BiocStyle)
 library(TFutils)
@@ -55,6 +61,8 @@ data(fimoMap)
 data(ebicat37)
 library(dplyr)
 library(magrittr)
+})
+})
 })
 ```
 
@@ -244,8 +252,7 @@ affinity measures and the binding site locations implied by
 these.  We then discuss use of results of ChIP-seq experiments
 for cell-type-specific binding site enumeration.
 
-### Affinity scores based on reference sequence
-
+**Affinity scores based on reference sequence.**
 The FIMO algorithm of the MEME suite (@Grant2011) was used
 to score the human reference genome for TF binding
 affinity for `r nrow(fimoMap)` motif matrices
@@ -328,8 +335,7 @@ ggplot(nn, aes(x=loc,y=score,group=tffam, colour=tffam)) +
  xlab("position on chr17, hg19")
 ```
 
-### TF binding predictions based on ChIP-seq data from ENCODE
-
+**TF binding predictions based on ChIP-seq data from ENCODE.**
 The ENCODE project provides BED-formatted
 reports on ChIP-seq experiments for many
 combinations of cell type and DNA-binding
@@ -481,4 +487,23 @@ table(tt[,1])
 
 # Discussion
 
-[TBD]
+Sources and consequences of variations in DNA transcription
+are fundamental problems for cell biology, and the projects we 
+have made use of are at the boundaries of current knowledge.
+
+It is noteworthy that the four resources used for Figure
+\@ref(fig:lkupset) agree on names of only 119 TFs.  The
+fact that CISBP distinguishes 475 TFs that are not identified
+in any other source should be better understood.
+We observe that the ascription of TF status to AHRR is
+based on its sharing motifs with AHR (see
+\url{http://cisbp.ccbr.utoronto.ca/TFreport.php?searchTF=T014165_1.02}).
+
+Figure \@ref(fig:TFclass) and Table \@ref(tab:classtab) 
+show that the classification of TFs
+is now fairly elaborate.  Use of the precise terminology of
+the TFClass system to label TFs of interest
+at present relies on associations provided
+with the HOCOMOCO catalog.  
+
+
