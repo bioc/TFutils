@@ -9,7 +9,7 @@ author:
     affiliation: Channing Division of Network Medicine, Brigham and Women's Hospital, Harvard Medical School
   - name: Nathalie Pochet
     affiliation: Department of Neurology, Brigham and Women's Hospital, Harvard Medical School; Broad Institute
-  - name: Rileen Sinha
+  - name: Celine Everaert
     affiliation: Department of Neurology, Brigham and Women's Hospital, Harvard Medical School; Broad Institute
   - name: Benjamin Raby
     affiliation: Channing Division of Network Medicine, Brigham and Women's Hospital, Harvard Medical School
