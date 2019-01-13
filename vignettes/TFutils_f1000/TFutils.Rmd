@@ -34,6 +34,7 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteIndexEntry{TFutils -- representing TFBS and TF target sets}
   %\VignetteEncoding{UTF-8}
+urlcolor: blue
 ---
 
 # Introduction
@@ -86,7 +87,7 @@ TFutils, which assembles various resources intended
 to clarify and unify approaches to working with
 TF concepts in bioinformatic analysis.  Computations
 described in this paper can be carried out with
-Bioconductor version 3.7.  The package can be 
+Bioconductor version 3.8.  The package can be 
 installed with
 ```
 # use install.packages("BiocManager") if not already available
@@ -99,7 +100,12 @@ classifying TFs, enumerating TF targets, and representing
 genome-wide quantification of TF binding affinity.
 This is followed by a review of the key data
 structures and functions provided in the package, and an
-example in cancer infomatics.
+example in cancer informatics.
+
+The present paper does not deal directly with the manipulation or
+interpretation of sequence motifs.  An excellent Bioconductor
+package that synthesizes many approaches to these tasks is
+`r Biocpkg("universalmotif")`.
 
 # Basic concepts of transcription factor bioinformatics
 
@@ -116,7 +122,7 @@ entries have all been used as TF identifiers.
 In TFutils we have gathered information from four
 widely used resources, focusing specifically
 on human TFs: Gene Ontology (GO, @Ashburner2000,
-in which GO:0003700 is the tag for the molecular
+in which `GO:0003700` is the tag for the molecular
 function concept "DNA binding transcription factor activity"),
 CISBP (@Weirauch2014), HOCOMOCO (@Kulakovskiy2018),
 and the "c3 TFT (transcription factor target)" signature set of MSigDb (@Subramanian15545).
@@ -126,7 +132,7 @@ catalogs, measured using counts
 of unique HGNC gene symbols.
 The enumeration for GO uses Bioconductor's
 `r Biocpkg("org.Hs.eg.db")` package to
-find direct associations from GO:0003700
+find direct associations from `GO:0003700`
 to HGNC symbols.  The enumeration for
 MSigDb is heuristic
 and involves parsing the gene set identifiers
