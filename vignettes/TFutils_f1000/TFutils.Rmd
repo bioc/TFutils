@@ -427,7 +427,7 @@ the targets of the selected TF.
 Figure \@ref(fig:lktarapp)
 gives an illustration.  
 
-```{r lktarapp, fig.cap='TFtargs() screenshot.',echo=FALSE}
+```{r lktarapp, fig.cap='TFtargs() screenshot.  This example reports on recent EBI GWAS catalog hits on chromosome 17 only.',echo=FALSE}
 pp = readPNG("tfTargsApp.png")
 grid.raster(pp)
 ```
@@ -495,7 +495,8 @@ table(tt[,1])
 
 Sources and consequences of variations in DNA transcription
 are fundamental problems for cell biology, and the projects we 
-have made use of are at the boundaries of current knowledge.
+have made use of for cataloging
+transcription factors are at the boundaries of current knowledge.
 
 It is noteworthy that the four resources used for Figure
 \@ref(fig:lkupset) agree on names of only 119 TFs.  The
@@ -510,6 +511,25 @@ show that the classification of TFs
 is now fairly elaborate.  Use of the precise terminology of
 the TFClass system to label TFs of interest
 at present relies on associations provided
-with the HOCOMOCO catalog.  
+with the HOCOMOCO catalog.
+
+As population studies in genomic and genetic epidemiology
+grow in size and scope, principles for organizing and
+prioritizing loci associated with phenotypes of interest
+are urgently needed.  Figure \@ref(fig:lktarapp) shows
+that loci associated with 
+phenotypes related to kidney function, lung function,
+and IL-8 levels are potentially unified through the fact
+that the GWAS hits are connected with genes identified
+as targets of VDR (vitamin D receptor).  This example
+limited attention to hits on chromosome 17; the `TFtargs` tool
+permits \textit{ad libitum} exploration of 
+phenotype-locus-gene-TF associations.
+Our hope is that
+the tools and resources collected in TFutils will foster
+systematic development of evidence-based mechanistic
+network models for transcription regulation in human
+disease contexts, thereby
+contributing to the development of personalized genomic medicine.
 
 
