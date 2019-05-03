@@ -1,3 +1,4 @@
+#' @importClassesFrom Rsamtools TabixFile
 setGeneric("importFIMO", function(src, parms, ...) standardGeneric("importFIMO"))
 
 #' import a FIMO bed-like file

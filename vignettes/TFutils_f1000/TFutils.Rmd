@@ -532,4 +532,9 @@ network models for transcription regulation in human
 disease contexts, thereby
 contributing to the development of personalized genomic medicine.
 
+# Acknowledgments
 
+Support for the development of this software was provided by NIH grants 
+U01 CA214846 (Carey, PI), U24 CA180996 (Morgan, PI),
+Chan Zuckerberg Initiative DAF 2018-183436 (Carey, PI), and
+R01 NHLBI HL118455 (Raby, PI).
