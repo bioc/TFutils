@@ -1,7 +1,7 @@
 Package: TFutils
 Title: TFutils
 Description: Package to work with TF data.
-Version: 1.5.1
+Version: 1.5.2
 Authors@R: c(
  person("Vincent", "Carey", role = c("aut"), email = "stvjc@channing.harvard.edu"),
  person("Shweta", "Gopaulakrishnan", role = c("cre","aut"), email = "reshg@channing.harvard.edu"))
@@ -12,7 +12,8 @@ Suggests: knitr, data.table, GSEABase, testthat,
 	GenomicRanges, Gviz, IRanges, Rsamtools, S4Vectors, 
 	org.Hs.eg.db, EnsDb.Hsapiens.v75, BiocParallel,
 	BiocStyle, GO.db, GenomicFiles, GenomeInfoDb,
-	SummarizedExperiment, UpSetR, ggplot2, png, gwascat
+	SummarizedExperiment, UpSetR, ggplot2, png, gwascat,
+	MotifDb, motifStack, RColorBrewer
 License: Artistic-2.0
 LazyLoad: true
 ByteCompile: true
