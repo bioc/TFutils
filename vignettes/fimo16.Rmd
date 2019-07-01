@@ -36,9 +36,29 @@ We can use `reduceByRange` to import selected scans.
 ```{r lkimp}
 si = GenomeInfoDb::Seqinfo(genome="hg19")["chr17"] # to fix query genome
 myg = GRanges("chr17", IRanges(38.07e6,38.09e6), seqinfo=si)
-lk2 = reduceByRange(fimo16[, which(fimo16$HGNC %in% c("POU2F1", "VDR"))],
+colnames(fimo16) = fimo16$HGNC 
+lk2 = reduceByRange(fimo16[, c("POU2F1", "VDR")],
   MAP=function(r,f) scanTabix(f, param=r))
 str(lk2)
 ```
 
 This result can be massaged into a GRanges or other desirable structure.
+Let's try to make something useful.
+
+```{r domult}
+fimo_ranges = function(gf, query) {
+ rowRanges(gf) = query
+ ans = reduceByRange(gf, MAP=function(r,f) scanTabix(f, param=r))
+ ans = unlist(ans, recursive=FALSE)  # drop top list structure
+ tabs = lapply(ans, lapply, function(x) {
+     con = textConnection(x)
+     on.exit(close(con))
+     dtf = read.delim(con, h=FALSE, stringsAsFactors=FALSE, sep="\t")
+     colnames(dtf) = c("chr", "start", "end", "rname", "score", "dir", "pval")
+     ans = with(dtf, GRanges(seqnames=chr, IRanges(start, end),
+            rname=rname, score=score, dir=dir, pval=pval))
+     ans
+     })
+ GRangesList(unlist(tabs, recursive=FALSE))
+}
+rr = fimo_ranges(fimo16[, c("POU2F1", "VDR")], myg)
