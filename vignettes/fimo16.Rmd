@@ -1,0 +1,44 @@
+---
+title: "A note on fimo16 in TFutils"
+author: "Vincent J. Carey, stvjc at channing.harvard.edu"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{A note on fimo16}
+  %\VignetteEncoding{UTF-8}
+output:
+  BiocStyle::html_document:
+    highlight: pygments
+    number_sections: yes
+    theme: united
+    toc: yes
+---
+
+# Introduction
+
+Sequence-based TF affinity scoring can be conducted with the FIMO
+suite, see @Sonawane2017.  We have serialized an object with
+references to FIMO outputs for 16 TFs.
+
+```{r lkfimo16}
+library(TFutils)
+library(GenomicRanges)
+fimo16
+```
+
+While the token `bed` is used in the filenames, the files are
+not actually bed format!
+
+# Importing with `scanTabix`
+
+We can use `reduceByRange` to import selected scans.
+
+```{r lkimp}
+si = GenomeInfoDb::Seqinfo(genome="hg19")["chr17"] # to fix query genome
+myg = GRanges("chr17", IRanges(38.07e6,38.09e6), seqinfo=si)
+lk2 = reduceByRange(fimo16[, which(fimo16$HGNC %in% c("POU2F1", "VDR"))],
+  MAP=function(r,f) scanTabix(f, param=r))
+str(lk2)
+```
+
+This result can be massaged into a GRanges or other desirable structure.
