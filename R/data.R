@@ -109,3 +109,12 @@
 #' @examples
 #' head(TFutils::hocomoco.mono.sep2018)
 "hocomoco.mono.sep2018"
+
+#' a list of GRanges instances with TF FIMO scores returned by `fimo_granges`
+#' @docType data 
+#' @format a list of GRanges instances
+#' @examples
+#' names(mcols(demo_fimo_granges))
+"demo_fimo_granges"
+
+
