@@ -21,8 +21,10 @@ suite, see @Sonawane2017.  We have serialized an object with
 references to FIMO outputs for 16 TFs.
 
 ```{r lkfimo16}
+suppressPackageStartupMessages({
 library(TFutils)
 library(GenomicRanges)
+})
 fimo16
 ```
 
@@ -43,22 +45,24 @@ str(lk2)
 ```
 
 This result can be massaged into a GRanges or other desirable structure.
-Let's try to make something useful.
+`fimo_granges` takes care of this.
 
 ```{r domult}
-fimo_ranges = function(gf, query) {
- rowRanges(gf) = query
- ans = reduceByRange(gf, MAP=function(r,f) scanTabix(f, param=r))
- ans = unlist(ans, recursive=FALSE)  # drop top list structure
- tabs = lapply(ans, lapply, function(x) {
-     con = textConnection(x)
-     on.exit(close(con))
-     dtf = read.delim(con, h=FALSE, stringsAsFactors=FALSE, sep="\t")
-     colnames(dtf) = c("chr", "start", "end", "rname", "score", "dir", "pval")
-     ans = with(dtf, GRanges(seqnames=chr, IRanges(start, end),
-            rname=rname, score=score, dir=dir, pval=pval))
-     ans
-     })
- GRangesList(unlist(tabs, recursive=FALSE))
-}
-rr = fimo_ranges(fimo16[, c("POU2F1", "VDR")], myg)
+#fimo_ranges = function(gf, query) { # prototypical code
+# rowRanges(gf) = query
+# ans = reduceByRange(gf, MAP=function(r,f) scanTabix(f, param=r))
+# ans = unlist(ans, recursive=FALSE)  # drop top list structure
+# tabs = lapply(ans, lapply, function(x) {
+#     con = textConnection(x)
+#     on.exit(close(con))
+#     dtf = read.delim(con, h=FALSE, stringsAsFactors=FALSE, sep="\t")
+#     colnames(dtf) = c("chr", "start", "end", "rname", "score", "dir", "pval")
+#     ans = with(dtf, GRanges(seqnames=chr, IRanges(start, end),
+#            rname=rname, score=score, dir=dir, pval=pval))
+#     ans
+#     })
+# GRangesList(unlist(tabs, recursive=FALSE))
+#}
+rr = fimo_granges(fimo16[, c("POU2F1", "VDR")], myg)
+rr
+```
