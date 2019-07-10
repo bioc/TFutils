@@ -12,6 +12,6 @@ demo_fimo_granges
 a list of GRanges instances with TF FIMO scores returned by \code{fimo_granges}
 }
 \examples{
-names(mcols(demo_fimo_granges))
+names(S4Vectors::mcols(demo_fimo_granges$VDR[[1]]))
 }
 \keyword{datasets}

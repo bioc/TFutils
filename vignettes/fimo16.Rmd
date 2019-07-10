@@ -36,7 +36,7 @@ not actually bed format!
 We can use `reduceByRange` to import selected scans.
 
 ```{r lkimp}
-si = GenomeInfoDb::Seqinfo(genome="hg19")["chr17"] # to fix query genome
+si = TFutils::seqinfo_hg19_chr17
 myg = GRanges("chr17", IRanges(38.07e6,38.09e6), seqinfo=si)
 colnames(fimo16) = fimo16$HGNC 
 lk2 = reduceByRange(fimo16[, c("POU2F1", "VDR")],

@@ -114,7 +114,12 @@
 #' @docType data 
 #' @format a list of GRanges instances
 #' @examples
-#' names(mcols(demo_fimo_granges))
+#' names(S4Vectors::mcols(demo_fimo_granges$VDR[[1]]))
 "demo_fimo_granges"
 
-
+#' a Seqinfo instance for a chr17 in hg19
+#' @docType data 
+#' @format a Seqinfo instance
+#' @examples
+#' seqinfo_hg19_chr17
+"seqinfo_hg19_chr17"
