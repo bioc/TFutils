@@ -1,4 +1,5 @@
 #' create a list of GRanges for FIMO hits in a GenomicFiles instance, corresponding to a GRanges-based query
+#' @importFrom Rsamtools seqinfo scanTabix
 #' @param gf GenomicFiles instance, like fimo16 in TFutils
 #' @param query a GRanges specifying ranges to check for TF binding scores
 #' @return a list of GRanges, produced by GenomicFiles::reduceByRange 
@@ -16,8 +17,7 @@
 #'  f1
 #' }
 #' @export
-fimo_granges = function (gf, query) 
-{
+fimo_granges = function (gf, query) {
     rowRanges(gf) = query
     proctext = function(x) {
         con = textConnection(x)
@@ -51,23 +51,23 @@ fimo_granges = function (gf, query)
     ans
 }
 
-fimo_granges_OLD = function (gf, query) 
-{
-    rowRanges(gf) = query
-    nfun = function(ans) lapply(ans, lapply, function(x) {
-        con = textConnection(x)
-        on.exit(close(con))
-        dtf = read.delim(con, h = FALSE, stringsAsFactors = FALSE, 
-            sep = "\t")
-        colnames(dtf) = c("chr", "start", "end", "rname", "score", 
-            "dir", "pval")
-        ans = with(dtf, GRanges(seqnames = chr, IRanges(start, 
-            end), rname = rname, score = score, dir = dir, pval = pval))
-        ans
-    })
-    ans = reduceByRange(gf, MAP = function(r, f) scanTabix(f, 
-        param = r), REDUCE = nfun)
-    ans = unlist(ans, recursive=FALSE)
-    names(ans) = rep(colnames(gf), length(query))
-    lapply(ans, lapply, function(x) {seqinfo(x) = seqinfo(query); x})
-}
+#fimo_granges_OLD = function (gf, query) 
+#{
+#    rowRanges(gf) = query
+#    nfun = function(ans) lapply(ans, lapply, function(x) {
+#        con = textConnection(x)
+#        on.exit(close(con))
+#        dtf = read.delim(con, h = FALSE, stringsAsFactors = FALSE, 
+#            sep = "\t")
+#        colnames(dtf) = c("chr", "start", "end", "rname", "score", 
+#            "dir", "pval")
+#        ans = with(dtf, GRanges(seqnames = chr, IRanges(start, 
+#            end), rname = rname, score = score, dir = dir, pval = pval))
+#        ans
+#    })
+#    ans = reduceByRange(gf, MAP = function(r, f) scanTabix(f, 
+#        param = r), REDUCE = nfun)
+#    ans = unlist(ans, recursive=FALSE)
+#    names(ans) = rep(colnames(gf), length(query))
+#    lapply(ans, lapply, function(x) {seqinfo(x) = seqinfo(query); x})
+#}

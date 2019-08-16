@@ -15,6 +15,7 @@
 "fimoMap"
 
 #' tftColl: GSEABase GeneSetCollection for transcription factor targets
+#' @importClassesFrom GSEABase GeneSetCollection
 #' @docType data
 #' @format GSEABase GeneSetCollection instance
 #' @source broad institute

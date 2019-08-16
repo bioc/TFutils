@@ -29,6 +29,7 @@ symToTFTName = function(TFsym, indToUse=1) {
   tfmap[ind[indToUse],1]
 }
 #' Use MSigDB TF targets resource to find targets of input TF and find traits to which these targets have been mapped
+#' @importFrom GSEABase geneIds SymbolIdentifier mapIdentifiers geneIdType
 #' @param TFsym character(1) symbol for a TF must be present in \code{tftCollMap[, "hgnc.heur"]}
 #' @param gsc an instance of \code{\link[GSEABase]{GeneSetCollection-class}}, intended to enumerate
 #' targets of a single transcription factor in each GeneSet, as in TFutils::tftColl

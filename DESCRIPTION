@@ -1,13 +1,13 @@
 Package: TFutils
 Title: TFutils
 Description: Package to work with TF data.
-Version: 1.5.7
+Version: 1.5.10
 Authors@R: c(
  person("Vincent", "Carey", role = c("aut"), email = "stvjc@channing.harvard.edu"),
  person("Shweta", "Gopaulakrishnan", role = c("cre","aut"), email = "reshg@channing.harvard.edu"))
 Depends: R (>= 3.5.0)
-Imports: methods, dplyr, magrittr, miniUI, shiny, Rsamtools
-Suggests: knitr, data.table, GSEABase, testthat,
+Imports: methods, dplyr, magrittr, miniUI, shiny, Rsamtools, GSEABase
+Suggests: knitr, data.table, testthat,
 	AnnotationDbi, AnnotationFilter, Biobase, GenomicFeatures,
 	GenomicRanges, Gviz, IRanges, Rsamtools, S4Vectors, 
 	org.Hs.eg.db, EnsDb.Hsapiens.v75, BiocParallel,
