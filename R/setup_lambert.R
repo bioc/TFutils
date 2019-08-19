@@ -38,15 +38,19 @@ ancize_column = function(x) {
 #' the comment fields of annotated TF table (supplemental table S1 found in
 #' \url{https://www.cell.com/cms/10.1016/j.cell.2018.01.029/attachment/88c0eca1-66f9-4068-b02e-bd3d55144f79/mmc2.xlsx} of PMID 29425488).  When DT::datatable is called on the output
 #' of this function with `escape=FALSE` the PMIDs will render as hyperlinks.
+#' Note that column 1 is assumed to be an ENSEMBL ID which could have 7 or 8 digits but is handled differently
 #' @examples
-#' litdf = data.frame(a="Binds the same GCCTGAGGC sequence as the other AP-2s (PMID: 24789576)",
+#' litdf = data.frame(id="ENSG00000116819", a="Binds the same GCCTGAGGC sequence as the other AP-2s (PMID: 24789576)",
 #'      stringsAsFactors=FALSE)
 #' anchor_pmids(litdf)
 #' @export
 anchor_pmids = function(dataframe) {
   haspmid = sapply(dataframe, function(x) length(grep(re78(), x))>0)
+  haspmid[1] = FALSE  # don't do ensembl IDs
   for (i in 1:ncol(dataframe)) {
    if (haspmid[i]) dataframe[,i] = ancize_column(dataframe[,i])
   }
+  dataframe[,1] = sprintf("<A HREF='https://www.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=%s'>%s</A>",
+        dataframe[,1], dataframe[,1])
   dataframe
 }
