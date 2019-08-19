@@ -18,7 +18,7 @@ retrieve_lambert_main = function(cache=BiocFileCache::BiocFileCache(ask=FALSE)) 
  ans
 }
 
-#' use DT::datatable to browse the Lambert table S2
+#' use DT::datatable to browse the Lambert table S1
 #' @param cache a BiocFileCache instance
 #' @note PMIDs are converted to HTML anchors and DT::datatable is run with `escape=FALSE`.
 #' @return result of DT::datatable
