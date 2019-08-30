@@ -11,7 +11,7 @@ pmid_inds = function(x) grep(re78(), x)
   
 isolate_pmid = function(x) {
    stopifnot(is.atomic(x), length(x)==1)
-   cand = strsplit(x, ": |\\)|:|\\]|;|'|\\(|\\[")[[1]]
+   cand = strsplit(x, " |: |\\)|:|\\]|;|'|\\(|\\[")[[1]]
    cand[grep(re78(), cand)]
   }
   

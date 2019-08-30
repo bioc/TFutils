@@ -33,7 +33,8 @@
 #' TFutils::fimo16
 "fimo16"
 
-#' cisbpTFcat: data.frame with information on CISBP TFs for human
+#' cisbpTFcat: data.frame with information on CISBP TFs for human, retained for reproducibility support; see
+#' cisbpTFcat_2.0 for a more recent catalog
 #' @docType data
 #' @format data.frame
 #' @source \url{http://cisbp.ccbr.utoronto.ca/bulk.php} select Homo_sapiens
@@ -124,3 +125,19 @@
 #' @examples
 #' seqinfo_hg19_chr17
 "seqinfo_hg19_chr17"
+
+#' cisbpTFcat_2.0: data.frame with information on CISBP TFs for human, described in PMID 31133749
+#' @docType data
+#' @format data.frame
+#' @source \url{http://cisbp.ccbr.utoronto.ca/bulk.php} select Homo_sapiens
+#' @note Extracted August 2019.
+#' @examples
+#' head(TFutils::cisbpTFcat_2.0)
+"cisbpTFcat_2.0"
+
+#' lambert_snps is Table S3 of Lambert et al PMID 29425488
+#' @docType data
+#' @format data.frame
+#' @examples
+#' head(lambert_snps)
+"lambert_snps"

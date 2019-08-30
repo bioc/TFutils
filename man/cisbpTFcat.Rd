@@ -3,7 +3,8 @@
 \docType{data}
 \name{cisbpTFcat}
 \alias{cisbpTFcat}
-\title{cisbpTFcat: data.frame with information on CISBP TFs for human}
+\title{cisbpTFcat: data.frame with information on CISBP TFs for human, retained for reproducibility support; see
+cisbpTFcat_2.0 for a more recent catalog}
 \format{data.frame}
 \source{
 \url{http://cisbp.ccbr.utoronto.ca/bulk.php} select Homo_sapiens
@@ -12,7 +13,8 @@
 cisbpTFcat
 }
 \description{
-cisbpTFcat: data.frame with information on CISBP TFs for human
+cisbpTFcat: data.frame with information on CISBP TFs for human, retained for reproducibility support; see
+cisbpTFcat_2.0 for a more recent catalog
 }
 \note{
 Extracted March 2018, checked August 2018.  The only changes
