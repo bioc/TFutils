@@ -4,7 +4,9 @@
 \name{gwascat_hg19_chr17}
 \alias{gwascat_hg19_chr17}
 \title{gwascat_hg19: GRanges of march 21 2018 EBI gwascat, limit to chr17}
-\format{GenomicRanges GRanges instance}
+\format{
+GenomicRanges GRanges instance
+}
 \source{
 gwascat::makeCurrentGwascat, with gwascat:::lo38to19 applied
 }

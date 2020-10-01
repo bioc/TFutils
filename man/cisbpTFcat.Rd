@@ -5,7 +5,9 @@
 \alias{cisbpTFcat}
 \title{cisbpTFcat: data.frame with information on CISBP TFs for human, retained for reproducibility support; see
 cisbpTFcat_2.0 for a more recent catalog}
-\format{data.frame}
+\format{
+data.frame
+}
 \source{
 \url{http://cisbp.ccbr.utoronto.ca/bulk.php} select Homo_sapiens
 }

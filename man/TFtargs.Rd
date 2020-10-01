@@ -4,9 +4,13 @@
 \alias{TFtargs}
 \title{gadget to help sort through tags naming TFs}
 \usage{
-TFtargs(gscoll = TFutils::tftColl, initTF = "VDR_Q3",
+TFtargs(
+  gscoll = TFutils::tftColl,
+  initTF = "VDR_Q3",
   gwcat = TFutils::gwascat_hg19_chr17,
-  gadtitle = "Search for a TF; its targets will be checked for mapped status in GWAS catalog")
+ 
+    gadtitle = "Search for a TF; its targets will be checked for mapped status in GWAS catalog"
+)
 }
 \arguments{
 \item{gscoll}{a GSEABase GeneSetCollection}

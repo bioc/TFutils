@@ -4,7 +4,9 @@
 \name{cisbpTFcat_2.0}
 \alias{cisbpTFcat_2.0}
 \title{cisbpTFcat_2.0: data.frame with information on CISBP TFs for human, described in PMID 31133749}
-\format{data.frame}
+\format{
+data.frame
+}
 \source{
 \url{http://cisbp.ccbr.utoronto.ca/bulk.php} select Homo_sapiens
 }

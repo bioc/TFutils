@@ -4,7 +4,9 @@
 \name{demo_fimo_granges}
 \alias{demo_fimo_granges}
 \title{a list of GRanges instances with TF FIMO scores returned by \code{fimo_granges}}
-\format{a list of GRanges instances}
+\format{
+a list of GRanges instances
+}
 \usage{
 demo_fimo_granges
 }

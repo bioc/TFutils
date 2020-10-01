@@ -4,7 +4,9 @@
 \name{fimoMap}
 \alias{fimoMap}
 \title{fimoMap: table with Mnnnn (motif PWM tags) and HGNC symbols for TFs}
-\format{data.frame}
+\format{
+data.frame
+}
 \source{
 Kimberly Glass (rekrg@channing.harvard.edu)
 }

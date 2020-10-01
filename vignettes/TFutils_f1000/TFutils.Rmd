@@ -59,7 +59,6 @@ library(grid)
 library(GSEABase) # for tftColl
 library(gwascat)
 data(fimoMap)
-data(ebicat37)
 library(dplyr)
 library(magrittr)
 })
@@ -475,7 +474,8 @@ with their TF "family name".
 library(dplyr)
 library(magrittr)
 library(gwascat)
-data(ebicat37)
+#data(ebicat37)
+load(system.file("legacy/ebicat37.rda", package="gwascat"))
 directHitsInCISBP("Rheumatoid arthritis", ebicat37)
 ```
 

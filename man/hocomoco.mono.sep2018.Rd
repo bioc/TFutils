@@ -4,7 +4,9 @@
 \name{hocomoco.mono.sep2018}
 \alias{hocomoco.mono.sep2018}
 \title{hocomoco.mono.sep2018: data.frame with information on HOCOMOCO TFs for human, Sept 2018 download}
-\format{data.frame}
+\format{
+data.frame
+}
 \source{
 \url{http://hocomoco11.autosome.ru/human/mono?full=true}
 }

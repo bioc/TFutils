@@ -4,7 +4,9 @@
 \name{hocomoco.mono}
 \alias{hocomoco.mono}
 \title{hocomoco.mono: data.frame with information on HOCOMOCO TFs for human}
-\format{data.frame}
+\format{
+data.frame
+}
 \source{
 \url{http://hocomoco11.autosome.ru/human/mono?full=true}
 }

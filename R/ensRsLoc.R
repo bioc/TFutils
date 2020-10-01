@@ -5,7 +5,7 @@
 #' location information, adding 1 as ensembl genomic coordinates
 #' are zero-based.
 #' @examples
-#' get_rslocs_38()
+#' if (interactive()) get_rslocs_38() # see https://stat.ethz.ch/pipermail/bioc-devel/2020-October/017263.html
 #' @export
 get_rslocs_38 = function(rsids = c("rs6060535", "rs56116432")) {
  server <- "https://rest.ensembl.org"

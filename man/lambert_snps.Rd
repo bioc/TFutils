@@ -4,7 +4,9 @@
 \name{lambert_snps}
 \alias{lambert_snps}
 \title{lambert_snps is Table S3 of Lambert et al PMID 29425488}
-\format{data.frame}
+\format{
+data.frame
+}
 \usage{
 lambert_snps
 }

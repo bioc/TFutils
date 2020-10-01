@@ -4,7 +4,9 @@
 \name{encode690}
 \alias{encode690}
 \title{encode690: DataFrame extending AnnotationHub metadata about ENCODE cell line x TF ranges}
-\format{DataFrame}
+\format{
+DataFrame
+}
 \source{
 see metadata(encode690)
 }

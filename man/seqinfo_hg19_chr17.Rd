@@ -4,7 +4,9 @@
 \name{seqinfo_hg19_chr17}
 \alias{seqinfo_hg19_chr17}
 \title{a Seqinfo instance for a chr17 in hg19}
-\format{a Seqinfo instance}
+\format{
+a Seqinfo instance
+}
 \usage{
 seqinfo_hg19_chr17
 }

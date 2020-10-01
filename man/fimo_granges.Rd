@@ -18,7 +18,7 @@ a list of GRanges, produced by GenomicFiles::reduceByRange
 create a list of GRanges for FIMO hits in a GenomicFiles instance, corresponding to a GRanges-based query
 }
 \note{
-Be sure to use \code{register([BPPARAM])} appropriately.
+Be sure to use \verb{register([BPPARAM])} appropriately.
 }
 \examples{
 if (interactive()) {   # need internet

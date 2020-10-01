@@ -4,11 +4,10 @@
 \alias{tffamCirc.prep}
 \title{set up list of pfms in motifStack protocol}
 \usage{
-tffamCirc.prep(tffam = "Paired-related HD factors{3.1.3}",
-  trimfac = 0.4)
+tffamCirc.prep(tffam = "Paired-related HD factors{3.1.3}", trimfac = 0.4)
 }
 \arguments{
-\item{tffam}{character(1) name of TF family as found in TFutils::hocomoco.mono field \code{TF family}}
+\item{tffam}{character(1) name of TF family as found in TFutils::hocomoco.mono field \verb{TF family}}
 
 \item{trimfac}{fraction passed as parameter \code{t} to motifStack::trimMotif}
 }

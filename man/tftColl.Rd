@@ -4,7 +4,9 @@
 \name{tftColl}
 \alias{tftColl}
 \title{tftColl: GSEABase GeneSetCollection for transcription factor targets}
-\format{GSEABase GeneSetCollection instance}
+\format{
+GSEABase GeneSetCollection instance
+}
 \source{
 broad institute
 }

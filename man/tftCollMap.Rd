@@ -4,7 +4,9 @@
 \name{tftCollMap}
 \alias{tftCollMap}
 \title{tftCollMap: data.frame with information on MSigDb TFs for human}
-\format{data.frame}
+\format{
+data.frame
+}
 \source{
 \url{http://software.broadinstitute.org/gsea/msigdb/genesets.jsp?collection=TFT}
 }

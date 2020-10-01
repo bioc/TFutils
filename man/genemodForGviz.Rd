@@ -4,8 +4,12 @@
 \alias{genemodForGviz}
 \title{create a GeneRegionTrack instance for selected symbols}
 \usage{
-genemodForGviz(sym = "ORMDL3", id_elem = c("symbol", "tx_id"),
-  resource = EnsDb.Hsapiens.v75::EnsDb.Hsapiens.v75, ...)
+genemodForGviz(
+  sym = "ORMDL3",
+  id_elem = c("symbol", "tx_id"),
+  resource = EnsDb.Hsapiens.v75::EnsDb.Hsapiens.v75,
+  ...
+)
 }
 \arguments{
 \item{sym}{character vector of gene symbols, should be neighboring genes}
