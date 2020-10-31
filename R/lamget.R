@@ -2,6 +2,7 @@
 cell_url = function() "https://www.cell.com/cms/10.1016/j.cell.2018.01.029/attachment/ede37821-fd6f-41b7-9a0e-9d5410855ae6/mmc2.xlsx"
 
 #' acquire the Excel spreadsheet content for table S1 of Lambert et al. Cell 2018, "The Human Transcription Factors"
+#' @import BiocFileCache
 #' @param cache a BiocFileCache instance
 #' @return a tbl_df
 #' @note This will download the spreadsheet if not found in `cache`.
