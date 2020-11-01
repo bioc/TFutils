@@ -1,4 +1,7 @@
 #' browse several hundred disease-TF associations with hyperlinked PMIDs
+#' @importFrom base factor
+#' @importFrom stats family
+#' @importFrom utils read.csv read.delim
 #' @examples
 #' if (interactive()) browse_lambert_gwaslinks()
 #' @note Based on supplemental table S4 of PMID 29425488

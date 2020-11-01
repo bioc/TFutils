@@ -3,6 +3,7 @@ cell_url = function() "https://www.cell.com/cms/10.1016/j.cell.2018.01.029/attac
 
 #' acquire the Excel spreadsheet content for table S1 of Lambert et al. Cell 2018, "The Human Transcription Factors"
 #' @import BiocFileCache
+#' @import readxl
 #' @param cache a BiocFileCache instance
 #' @return a tbl_df
 #' @note This will download the spreadsheet if not found in `cache`.
@@ -13,7 +14,7 @@ retrieve_lambert_main = function(cache=BiocFileCache::BiocFileCache(ask=FALSE)) 
  uuid_element = "ede37821-fd6f"
  peek = BiocFileCache::bfcquery(cache, uuid_element)
  if(length(peek$rpath)==0) 
-   bfcadd(cache, 
+   BiocFileCache::bfcadd(cache, 
     cell_url())
  peek = try(BiocFileCache::bfcquery(cache, uuid_element))
  if (inherits(peek, "try-error") || length(peek$rpath)==0) stop('could not retrieve xlsx')
