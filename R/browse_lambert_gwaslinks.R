@@ -1,5 +1,4 @@
 #' browse several hundred disease-TF associations with hyperlinked PMIDs
-#' @importFrom base factor
 #' @importFrom stats family
 #' @importFrom utils read.csv read.delim
 #' @examples
