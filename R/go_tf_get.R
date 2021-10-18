@@ -1,8 +1,8 @@
-# Last updated 2021 Oct 12
+#' Update Oct 18 2021
 
 gotf_url = function() "https://www.biorxiv.org/content/biorxiv/early/2020/12/07/2020.10.28.359232/DC1/embed/media-1.xlsx"
 
-#' acquire the CSV content for table S1 of Lambert et al. Cell 2018, "The Human Transcription Factors" from the Human TFS website
+#' the content of Table S1.A from Lovering et al., A GO catalogue of human DNA-binding transcription factors, DOI: https://doi.org/10.1101/2020.10.28.359232
 #' @import AnnotationDbi
 #' @import BiocFileCache
 #' @import readxl
@@ -27,9 +27,8 @@ retrieve_gotf_main = function(cache=BiocFileCache::BiocFileCache(ask=FALSE)) {
 }
 
 
-#' use DT::datatable to browse the Gotf table xxx
+#' use DT::datatable to browse the GO catalogue of human DNA-binding transcription factors in Table S1.A of Lovering et al.
 #' @param cache a BiocFileCache instance
-#' @note PMIDs are converted to HTML anchors and DT::datatable is run with `escape=FALSE`.
 #' @return result of DT::datatable
 #' @examples
 #' if (interactive()) browse_gotf_main()
@@ -37,9 +36,10 @@ retrieve_gotf_main = function(cache=BiocFileCache::BiocFileCache(ask=FALSE)) {
 browse_gotf_main = function(cache=BiocFileCache::BiocFileCache(ask=FALSE)) {
   tab = as.data.frame(retrieve_gotf_main(cache=cache))
   names(tab) <- gsub(" ", "_", names(tab))
-  ids <- AnnotationDbi::mapIds(org.Hs.eg.db, tab$HGNC_approved_gene_symbol, "ENSEMBL", "SYMBOL", multiVals="list")
+  idx = tab$UniProt_ID != 'pseudogene' # keep only protein coding genes
+  tab <- tab[ idx, ]
+  ids = AnnotationDbi::mapIds(org.Hs.eg.db, tab$HGNC_approved_gene_symbol, "ENSEMBL", "SYMBOL", multiVals="list") # add Ensembl Ids 
   tab$ENSEMBLID <- ids
-  # tab = anchor_pmids(tab)
   DT::datatable(tab, escape=FALSE)
   
 }
