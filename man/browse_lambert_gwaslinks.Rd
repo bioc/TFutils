@@ -6,6 +6,9 @@
 \usage{
 browse_lambert_gwaslinks()
 }
+\value{
+DT::datatable
+}
 \description{
 browse several hundred disease-TF associations with hyperlinked PMIDs
 }

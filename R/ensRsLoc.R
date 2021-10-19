@@ -4,6 +4,7 @@
 #' Parses result minimally, using only the first SPDI to obtain
 #' location information, adding 1 as ensembl genomic coordinates
 #' are zero-based.
+#' @return GRanges instance
 #' @examples
 #' if (interactive()) get_rslocs_38() # see https://stat.ethz.ch/pipermail/bioc-devel/2020-October/017263.html
 #' @export

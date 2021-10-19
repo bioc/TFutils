@@ -36,12 +36,14 @@ not actually bed format!
 We can use `reduceByRange` to import selected scans.
 
 ```{r lkimp}
-si = TFutils::seqinfo_hg19_chr17
-myg = GRanges("chr17", IRanges(38.07e6,38.09e6), seqinfo=si)
-colnames(fimo16) = fimo16$HGNC 
-lk2 = reduceByRange(fimo16[, c("POU2F1", "VDR")],
-  MAP=function(r,f) scanTabix(f, param=r))
-str(lk2)
+if (.Platform$OS.type != "windows") {
+ si = TFutils::seqinfo_hg19_chr17
+ myg = GRanges("chr17", IRanges(38.07e6,38.09e6), seqinfo=si)
+ colnames(fimo16) = fimo16$HGNC 
+ lk2 = reduceByRange(fimo16[, c("POU2F1", "VDR")],
+   MAP=function(r,f) scanTabix(f, param=r))
+ str(lk2)
+}
 ```
 
 This result can be massaged into a GRanges or other desirable structure.
@@ -65,4 +67,8 @@ This result can be massaged into a GRanges or other desirable structure.
 #}
 rr = fimo_granges(fimo16[, c("POU2F1", "VDR")], myg)
 rr
+```
+
+```{r sesss}
+sessionInfo()
 ```

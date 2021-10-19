@@ -24,7 +24,7 @@ ngs = sapply(gscoll, GSEABase::setName)
 allst1 = unlist(lapply(gscoll[ grep(tfstub, ngs) ], GSEABase::geneIds))
 st1syms = AnnotationDbi::mapIds(orgdb, keys=allst1, keytype="ENTREZID", column="SYMBOL")
 chk = as(S4Vectors::mcols(gwrngs), "data.frame") %>% 
-     filter(MAPPED_GENE %in% st1syms) %>% select(`DISEASE/TRAIT`, MAPPED_GENE, CHR_ID, CHR_POS, REGION)
+     dplyr::filter(MAPPED_GENE %in% st1syms) %>% dplyr::select(`DISEASE/TRAIT`, MAPPED_GENE, CHR_ID, CHR_POS, REGION)
 cbind(TF=tfstub, chk)
 }
 

@@ -20,17 +20,19 @@ targets of a single transcription factor in each GeneSet, as in TFutils::tftColl
 
 \item{\dots}{character() vector of fields in mcols(gwcat) to include}
 }
+\value{
+data.frame
+symbol, set force = TRUE to use a known 'motif' name among \code{names(gsc)}
+}
 \description{
 Use MSigDB TF targets resource to find targets of input TF and find traits to which these targets have been mapped
 }
 \note{
 If \code{tftCollMap[, "hgnc.heur"]} does not possess the necessary
-symbol, set force = TRUE to use a known 'motif' name among \code{names(gsc)}
 }
 \examples{
 suppressPackageStartupMessages({
 library(GSEABase)
-library(TFutils)
 })  # more results if you substitute ebicat37 from gwascat below
 topTraitsOfTargets("MTF1" , tftColl, gwascat_hg19_chr17)
 }

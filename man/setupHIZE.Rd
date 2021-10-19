@@ -11,6 +11,9 @@ setupHIZE(txtfn = "gene_attribute_matrix.txt", tag)
 
 \item{tag}{character(1) will be added to shortDescription field of each GeneSet instance}
 }
+\value{
+GSEABase::GeneSetCollection
+}
 \description{
 process a gene_attribute_matrix.txt file from harmonizeome into a GeneSetCollection
 }

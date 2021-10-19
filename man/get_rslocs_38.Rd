@@ -9,6 +9,9 @@ get_rslocs_38(rsids = c("rs6060535", "rs56116432"))
 \arguments{
 \item{rsids}{character vector of dbSNP identifiers}
 }
+\value{
+GRanges instance
+}
 \description{
 utility to obtain location etc. for rsids of SNPs
 }

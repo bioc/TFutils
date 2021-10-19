@@ -38,11 +38,11 @@ symToTFTName = function(TFsym, indToUse=1) {
 #' @param force logical see note, set to true if you want to skip mapping from TFsym to a specific motif or TF identifier used as name of a GeneSet in gsc
 #' @param \dots character() vector of fields in mcols(gwcat) to include
 #' @note If \code{tftCollMap[, "hgnc.heur"]} does not possess the necessary
+#' @return data.frame
 #' symbol, set force = TRUE to use a known 'motif' name among `names(gsc)`
 #' @examples
 #' suppressPackageStartupMessages({
 #' library(GSEABase)
-#' library(TFutils)
 #' })  # more results if you substitute ebicat37 from gwascat below
 #' topTraitsOfTargets("MTF1" , tftColl, gwascat_hg19_chr17)
 #' @export

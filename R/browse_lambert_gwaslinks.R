@@ -3,6 +3,7 @@
 #' @importFrom utils read.csv read.delim
 #' @examples
 #' if (interactive()) browse_lambert_gwaslinks()
+#' @return DT::datatable
 #' @note Based on supplemental table S4 of PMID 29425488
 #' @export
 browse_lambert_gwaslinks = function() {

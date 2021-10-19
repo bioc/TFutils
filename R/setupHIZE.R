@@ -1,6 +1,7 @@
 #' process a gene_attribute_matrix.txt file from harmonizeome into a GeneSetCollection
 #' @param txtfn character(1) path to gene_attribute_matrix.txt file from harmonizeome
 #' @param tag character(1) will be added to shortDescription field of each GeneSet instance
+#' @return GSEABase::GeneSetCollection
 #' @note After uncompressing content of \url{http://amp.pharm.mssm.edu/static/hdfs/harmonizome/data/cheappi/gene_attribute_matrix.txt.gz} run this on gene_attribute_matrix.txt with tag="CHEA".
 setupHIZE = function(txtfn="gene_attribute_matrix.txt", tag) {
 # http://amp.pharm.mssm.edu/static/hdfs/harmonizome/data/cheappi/gene_attribute_matrix.txt.gz

@@ -3,7 +3,7 @@
 gotf_url = function() "https://www.biorxiv.org/content/biorxiv/early/2020/12/07/2020.10.28.359232/DC1/embed/media-1.xlsx"
 
 #' acquire the CSV content for table S1 of Lambert et al. Cell 2018, "The Human Transcription Factors" from the Human TFS website
-#' @import AnnotationDbi
+#' @rawNamespace import(AnnotationDbi, except=select)
 #' @import BiocFileCache
 #' @import readxl
 #' @import org.Hs.eg.db
