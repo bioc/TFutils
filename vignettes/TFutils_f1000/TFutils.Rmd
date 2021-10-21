@@ -279,11 +279,15 @@ below) using `reduceByFile`.
 This yields a list with one element per file.  Each such
 element holds a list of `scanTabix` results, one per query range.
 ```{r demoredu2, cache=TRUE}
-library(BiocParallel)
-register(SerialParam()) # important for macosx?
-rowRanges(fimo16) = GRanges("chr17", IRanges(38.077e6, 38.084e6))
-rr = GenomicFiles::reduceByFile(fimo16, MAP=function(r,f)
-  scanTabix(f, param=r))
+if (.Platform$OS.type != "windows") {
+ library(BiocParallel)
+ register(SerialParam()) # important for macosx?
+ rowRanges(fimo16) = GRanges("chr17", IRanges(38.077e6, 38.084e6))
+ rr = GenomicFiles::reduceByFile(fimo16, MAP=function(r,f)
+   scanTabix(f, param=r))
+} else {
+rr = readRDS(system.file("fimoser/fimo16rr.rds", package="TFutils"))
+}
 ```
 scanTabix produces a list of vectors of text strings, which we parse
 with `data.table::fread`.  The resulting tables are then
@@ -538,3 +542,9 @@ Support for the development of this software was provided by NIH grants
 U01 CA214846 (Carey, PI), U24 CA180996 (Morgan, PI),
 Chan Zuckerberg Initiative DAF 2018-183436 (Carey, PI), and
 R01 NHLBI HL118455 (Raby, PI).
+
+# Session Information
+
+```{r dose}
+sessionInfo()
+```

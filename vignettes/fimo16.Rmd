@@ -65,8 +65,10 @@ This result can be massaged into a GRanges or other desirable structure.
 #     })
 # GRangesList(unlist(tabs, recursive=FALSE))
 #}
-rr = fimo_granges(fimo16[, c("POU2F1", "VDR")], myg)
-rr
+if (.Platform$OS.type != "windows") {
+ rr = fimo_granges(fimo16[, c("POU2F1", "VDR")], myg)
+ rr
+}
 ```
 
 ```{r sesss}
