@@ -3,7 +3,7 @@ Title: TFutils
 Description: This package helps users to work with TF metadata from various sources.
 	Significant catalogs of TFs and classifications thereof are made available.
 	Tools for working with motif scans are also provided.
-Version: 1.25.0
+Version: 1.26.0
 Authors@R: c(
  person("Vincent", "Carey", role = c("aut", "cre"), email = "stvjc@channing.harvard.edu"),
  person("Shweta", "Gopaulakrishnan", role = c("aut"), email = "reshg@channing.harvard.edu"))
