@@ -2,7 +2,7 @@
 % Please edit documentation in R/lambert_ccbr_get.R
 \name{browse_humantfs_main}
 \alias{browse_humantfs_main}
-\title{use DT::datatable to browse the Lambert table S1}
+\title{use DT::datatable to browse the Lambert's Human Transcription Factors repository}
 \usage{
 browse_humantfs_main(cache = BiocFileCache::BiocFileCache(ask = FALSE))
 }
@@ -13,11 +13,8 @@ browse_humantfs_main(cache = BiocFileCache::BiocFileCache(ask = FALSE))
 result of DT::datatable
 }
 \description{
-use DT::datatable to browse the Lambert table S1
-}
-\note{
-PMIDs are converted to HTML anchors and DT::datatable is run with \code{escape=FALSE}.
+use DT::datatable to browse the Lambert's Human Transcription Factors repository
 }
 \examples{
-if (interactive()) browse_lambert_main()
+if (interactive()) browse_humantfs_main()
 }

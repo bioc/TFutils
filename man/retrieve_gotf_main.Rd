@@ -2,7 +2,8 @@
 % Please edit documentation in R/go_tf_get.R
 \name{retrieve_gotf_main}
 \alias{retrieve_gotf_main}
-\title{acquire the CSV content for table S1 of Lambert et al. Cell 2018, "The Human Transcription Factors" from the Human TFS website}
+\title{acquire the content of Table S1.A from Lovering et al., A GO catalogue of human DNA-binding
+transcription factors, DOI: https://doi.org/10.1101/2020.10.28.359232}
 \usage{
 retrieve_gotf_main(cache = BiocFileCache::BiocFileCache(ask = FALSE))
 }
@@ -13,7 +14,8 @@ retrieve_gotf_main(cache = BiocFileCache::BiocFileCache(ask = FALSE))
 a tbl_df
 }
 \description{
-acquire the CSV content for table S1 of Lambert et al. Cell 2018, "The Human Transcription Factors" from the Human TFS website
+acquire the content of Table S1.A from Lovering et al., A GO catalogue of human DNA-binding
+transcription factors, DOI: https://doi.org/10.1101/2020.10.28.359232
 }
 \note{
 This will download the spreadsheet if not found in \code{cache}.

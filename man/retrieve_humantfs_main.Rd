@@ -2,7 +2,7 @@
 % Please edit documentation in R/lambert_ccbr_get.R
 \name{retrieve_humantfs_main}
 \alias{retrieve_humantfs_main}
-\title{acquire the CSV content for table S1 of Lambert et al. Cell 2018, "The Human Transcription Factors" from the Human TFS website}
+\title{acquire the CSV content for table S1 of Lambert et al. Cell 2018 from the Human TFS repository at http://humantfs.ccbr.utoronto.ca}
 \usage{
 retrieve_humantfs_main(cache = BiocFileCache::BiocFileCache(ask = FALSE))
 }
@@ -13,11 +13,11 @@ retrieve_humantfs_main(cache = BiocFileCache::BiocFileCache(ask = FALSE))
 a tbl_df
 }
 \description{
-acquire the CSV content for table S1 of Lambert et al. Cell 2018, "The Human Transcription Factors" from the Human TFS website
+acquire the CSV content for table S1 of Lambert et al. Cell 2018 from the Human TFS repository at http://humantfs.ccbr.utoronto.ca
 }
 \note{
 This will download the spreadsheet if not found in \code{cache}.
 }
 \examples{
-if (interactive()) retrieve_lambert_main()
+if (interactive()) retrieve_humantfs_main()
 }

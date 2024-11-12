@@ -2,7 +2,7 @@
 setGeneric("importFIMO", function(src, parms, ...) standardGeneric("importFIMO"))
 
 #' import a FIMO bed-like file
-#' # @importFrom utils read.delim
+#' @importFrom utils read.delim
 #' @rdname importFIMO
 #' @aliases importFIMO,TabixFile,GRanges-method importFIMO
 #' @param src TabixFile instance

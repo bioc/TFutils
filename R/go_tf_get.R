@@ -1,9 +1,12 @@
 #' Update Oct 18 2021
 
-gotf_url = function() "https://www.biorxiv.org/content/biorxiv/early/2020/12/07/2020.10.28.359232/DC1/embed/media-1.xlsx"
+gotf_url = function() {
+   "https://www.biorxiv.org/content/biorxiv/early/2020/12/07/2020.10.28.359232/DC1/embed/media-1.xlsx"
+}
 
+#' acquire the content of Table S1.A from Lovering et al., A GO catalogue of human DNA-binding 
+#' transcription factors, DOI: https://doi.org/10.1101/2020.10.28.359232
 #' @rawNamespace import(AnnotationDbi, except=select)
-#' acquire the content of Table S1.A from Lovering et al., A GO catalogue of human DNA-binding transcription factors, DOI: https://doi.org/10.1101/2020.10.28.359232
 #' @import BiocFileCache
 #' @import readxl
 #' @import org.Hs.eg.db

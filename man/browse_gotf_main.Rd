@@ -2,7 +2,7 @@
 % Please edit documentation in R/go_tf_get.R
 \name{browse_gotf_main}
 \alias{browse_gotf_main}
-\title{use DT::datatable to browse the Gotf table xxx}
+\title{use DT::datatable to browse the GO catalogue of human DNA-binding transcription factors in Table S1.A of Lovering et al.}
 \usage{
 browse_gotf_main(cache = BiocFileCache::BiocFileCache(ask = FALSE))
 }
@@ -13,10 +13,7 @@ browse_gotf_main(cache = BiocFileCache::BiocFileCache(ask = FALSE))
 result of DT::datatable
 }
 \description{
-use DT::datatable to browse the Gotf table xxx
-}
-\note{
-PMIDs are converted to HTML anchors and DT::datatable is run with \code{escape=FALSE}.
+use DT::datatable to browse the GO catalogue of human DNA-binding transcription factors in Table S1.A of Lovering et al.
 }
 \examples{
 if (interactive()) browse_gotf_main()
