@@ -1,5 +1,5 @@
 #' create a list of GRanges for FIMO hits in a GenomicFiles instance, corresponding to a GRanges-based query
-#' @importFrom Rsamtools seqinfo scanTabix
+#' @importFrom Rsamtools scanTabix
 #' @importFrom GenomicFiles reduceByRange
 #' @import SummarizedExperiment
 #' @param gf GenomicFiles instance, like fimo16 in TFutils
@@ -38,14 +38,14 @@ fimo_granges = function (gf, query) {
     if (ncol(gf) == 1) {  # REDUCE IS NOT INVOKED FOR ncol(fg) == 1
         ans = lapply(ans, function(z) proctext(z[[1]]))
         ans = lapply(ans, function(z) {
-          seqinfo(z) = seqinfo(query)
+          Seqinfo::seqinfo(z) = Seqinfo::seqinfo(query)
           z
         })
        }
     else {
         ans = unlist(ans, recursive = FALSE)
         ans = lapply(ans, lapply, function(x) {
-            seqinfo(x) = seqinfo(query)
+            Seqinfo::seqinfo(x) = Seqinfo::seqinfo(query)
             x
         })
     }
@@ -71,5 +71,5 @@ fimo_granges = function (gf, query) {
 #        param = r), REDUCE = nfun)
 #    ans = unlist(ans, recursive=FALSE)
 #    names(ans) = rep(colnames(gf), length(query))
-#    lapply(ans, lapply, function(x) {seqinfo(x) = seqinfo(query); x})
+#    lapply(ans, lapply, function(x) {Seqinfo::seqinfo(x) = Seqinfo::seqinfo(query); x})
 #}
