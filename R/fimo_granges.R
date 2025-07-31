@@ -11,7 +11,7 @@
 #'  # setup -- annotate fimo16 object and create an informative
 #'  # query
 #'  colnames(fimo16) = fimo16$HGNC
-#'  si = GenomeInfoDb::Seqinfo(genome="hg19")["chr17"] # to fix query genome
+#'  si = Seqinfo::Seqinfo(genome="hg19")["chr17"] # to fix query genome
 #'  myg = GRanges("chr17", IRanges(38.07e6,38.09e6), seqinfo=si)
 #'  requireNamespace("BiocParallel")
 #'  BiocParallel::register(BiocParallel::SerialParam())

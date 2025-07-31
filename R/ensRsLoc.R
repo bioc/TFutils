@@ -23,7 +23,7 @@ get_rslocs_38 = function(rsids = c("rs6060535", "rs56116432")) {
  chrs = sapply(sspd, "[", 1)
  locs = as.numeric(sapply(sspd, "[", 2))+1
  ans = GenomicRanges::GRanges(chrs, IRanges::IRanges(locs, width=1))
- GenomeInfoDb::genome(ans) = "GRCh38"
+ Seqinfo::genome(ans) = "GRCh38"
  names(ans) = ids
  ans
 }

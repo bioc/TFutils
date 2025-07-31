@@ -16,14 +16,14 @@ setGeneric("importFIMO", function(src, parms, ...) standardGeneric("importFIMO")
 #'  }
 #' @export
 setMethod("importFIMO", c("TabixFile", "GRanges"), function(src, parms, ...) {
-  jnk = lapply(c("GenomeInfoDb", "Rsamtools", "GenomicRanges", "IRanges",
-    "GenomeInfoDb"), reqNS)
+  jnk = lapply(c("Seqinfo", "Rsamtools", "GenomicRanges", "IRanges",
+    "Seqinfo"), reqNS)
   tmp = Rsamtools::scanTabix(src, param=parms) # list with one element per range in parms
   dfs = lapply(tmp, function(x) utils::read.delim(textConnection(x), header=FALSE))
   alldf = do.call(rbind, dfs)
   GenomicRanges::GRanges(alldf$V1, IRanges::IRanges(
       start=alldf$V2, end=alldf$V3), score=alldf$V5, pvalue=alldf$V7, strand=alldf$V6, 
-      seqinfo=GenomeInfoDb::seqinfo(parms), ...)
+      seqinfo=Seqinfo::seqinfo(parms), ...)
 })
 
 #' @rdname importFIMO
