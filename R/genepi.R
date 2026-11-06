@@ -11,8 +11,8 @@ directHitsInCISBP = function(traitTag, gwascat) {
    reqNS("dplyr")
    stopifnot(traitTag %in% gwascat$`DISEASE/TRAIT`)
    as.data.frame(S4Vectors::mcols(gwascat)) %>%  # names are normalized
-     dplyr::select(DISEASE.TRAIT, MAPPED_GENE) %>%
-     dplyr::filter(DISEASE.TRAIT==traitTag) %>%
+     dplyr::select(`DISEASE/TRAIT`, MAPPED_GENE) %>%
+     dplyr::filter(`DISEASE/TRAIT`==traitTag) %>%
      dplyr::mutate(HGNC=MAPPED_GENE) %>%
      dplyr::inner_join(cisbpTFcat) %>%
      dplyr::select(HGNC, Family_Name) %>% unique()
@@ -61,6 +61,6 @@ topTraitsOfTargets = function(TFsym, gsc, gwcat, ntraits=6, force=FALSE, ...) {
   trtab = table(glis <- gwcat$`DISEASE/TRAIT`[which(gwcat$MAPPED_GENE %in% targs)])
   topl = sort(trtab, decreasing=TRUE)[seq_len(ntraits)]
   ans = ans[which(ans[,1] %in% names(topl)),]
-  as.data.frame(ans) %>% arrange(DISEASE.TRAIT) %>% unique()
+  as.data.frame(ans) %>% arrange(`DISEASE/TRAIT`) %>% unique()
 }
 

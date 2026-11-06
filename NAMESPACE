@@ -36,26 +36,36 @@ import(org.Hs.eg.db)
 import(readxl)
 importClassesFrom(GSEABase,GeneSetCollection)
 importClassesFrom(Rsamtools,TabixFile)
-importFrom(GSEABase,SymbolIdentifier)
-importFrom(GSEABase,geneIdType)
-importFrom(GSEABase,geneIds)
-importFrom(GSEABase,mapIdentifiers)
+importFrom(GSEABase,
+  SymbolIdentifier,
+  geneIdType,
+  geneIds,
+  mapIdentifiers
+)
 importFrom(GenomicFiles,reduceByRange)
 importFrom(Rsamtools,scanTabix)
-importFrom(methods,as)
-importFrom(methods,is)
-importFrom(methods,new)
-importFrom(methods,show)
-importFrom(methods,slot)
-importFrom(shiny,dataTableOutput)
-importFrom(shiny,observeEvent)
-importFrom(shiny,reactive)
-importFrom(shiny,renderDataTable)
-importFrom(shiny,runGadget)
-importFrom(shiny,selectInput)
-importFrom(shiny,stopApp)
-importFrom(stats,family)
-importFrom(stats,na.omit)
-importFrom(utils,read.csv)
-importFrom(utils,read.csv2)
-importFrom(utils,read.delim)
+importFrom(methods,
+  as,
+  is,
+  new,
+  show,
+  slot
+)
+importFrom(shiny,
+  dataTableOutput,
+  observeEvent,
+  reactive,
+  renderDataTable,
+  runGadget,
+  selectInput,
+  stopApp
+)
+importFrom(stats,
+  family,
+  na.omit
+)
+importFrom(utils,
+  read.csv,
+  read.csv2,
+  read.delim
+)
